@@ -2,15 +2,15 @@ from tkinter import *
 from tkinter import filedialog
 from tkinter import messagebox
 
-#melakukan enkripsi dengan constraint 26 huruf alphabet
-#input dapat berupa spasi, tetapi hasil tidak akan ada spasi dan akan otomatis jadi huruf kapital
-#plain text di luar alphabet tidak dienkripsi
+#melakukan enkripsi 26 huruf alphabet dengan konversi ke huruf kapital
+#plaintext dapat berupa non-alphabet, tetapi pembacaannya diskip
 def encrypt():
     if len(key.get()) == 0:
         messagebox.showerror("Error", "Key is empty")
     elif len(plain.get()) == 0:
         messagebox.showerror("Error", "Plain text is empty")
-    elif ((plain.get() >= chr(65) and plain.get() <= chr(90) or plain.get() >= chr(97) and plain.get() <= chr(122)  or plain.get().isspace == True) and (key.get() >= chr(65) and key.get() <= chr(90) or key.get() >= chr(97) and key.get() <= chr(122) or key.get().isspace == True)):
+    #pengecekan kunci harus alphabet
+    if (key.get() >= chr(65) and key.get() <= chr(90) or key.get() >= chr(97) and key.get() <= chr(122)):
         keyinput = key.get()   
         keyinput = keyinput.replace(" ", "")  
         keyinput = keyinput.upper()
@@ -25,14 +25,12 @@ def encrypt():
                 continue
         cipher.set(ciphertext)
         cipherfive.set(fiveletters(ciphertext))
-        messagebox.showinfo("Success", "Encryption success")
+        messagebox.showinfo("Success", "Encryption Success")
     else:
-        messagebox.showerror("Error", "Key and/or plain text is not alphabet")
+        messagebox.showerror("Error", "Key is not alphabet")
 
 
-#melakukan dekripsi dengan constraint 26 huruf alphabet
-#input dapat berupa spasi, tetapi hasil tidak akan ada spasi dan akan otomatis jadi huruf kapital
-#cipher text di luar alphabet tidak didekripsi
+#melakukan dekripsi 26 huruf alphabet
 def decrypt():
     if len(key.get()) == 0:
         messagebox.showerror("Error", "Key is empty")
@@ -55,14 +53,20 @@ def decrypt():
         plainfive.set(fiveletters(plaintextinput))
         messagebox.showinfo("Success", "Decryption success")
     else:
-        messagebox.showerror("Error", "Key and/or plain text is not alphabet")
+        messagebox.showerror("Error", "Key and chiper text is not match!")
 
 #untuk membuka file teks dan langsung ada di kotak teks
 def openfile():
-    file = filedialog.askopenfile(mode='r', filetypes=[('Text File', '*.txt')])
-    if file is not None:
-        content = file.read()
-        plain.set(content)
+    try:
+        file = filedialog.askopenfile(mode='r', filetypes=[('All files', '*')])
+        if file is not None:
+            content = file.read(10000)
+            plain.set(content)
+    except:
+        file = filedialog.askopenfile(mode='rb', filetypes=[('All files', '*')])
+        if file is not None:
+            content = file.read(10000)
+            plain.set(content)
 
 #fitur untuk menyimpan file teks jika sudah dienkripsi/didekripsi
 def savefile():

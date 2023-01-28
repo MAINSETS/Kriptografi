@@ -43,10 +43,16 @@ def decrypt():
 
 #untuk membuka file teks dan langsung ada di kotak teks
 def openfile():
-    file = filedialog.askopenfile(mode='r', filetypes=[('Text File', '*.txt')])
-    if file is not None:
-        content = file.read()
-        plain.set(content)
+    try:
+        file = filedialog.askopenfile(mode='r', filetypes=[('All files', '*')])
+        if file is not None:
+            content = file.read(10000)
+            plain.set(content)
+    except:
+        file = filedialog.askopenfile(mode='rb', filetypes=[('All files', '*')])
+        if file is not None:
+            content = file.read(10000)
+            plain.set(content)
 
 #fitur untuk menyimpan file teks jika sudah dienkripsi/didekripsi
 def savefile():

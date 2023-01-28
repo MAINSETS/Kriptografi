@@ -17,13 +17,14 @@ def removeSpaces(text):
 
 #fungsi menghapus karakter non-alfabet 
 def removeNonASCII(text):
-	newtext = ""
-	for i in text:
-		if i not in string.ascii_lowercase:
-			continue
-		else:
-			newtext = newtext + i
-	return newtext
+    text.lower()
+    newtext = ""
+    for i in text:
+        if i not in string.ascii_lowercase:
+            continue
+        else:
+            newtext = newtext + i
+    return newtext
 
 #fungsi menampilkan text dalam kelompok 5 huruf
 def fiveletter(text):
