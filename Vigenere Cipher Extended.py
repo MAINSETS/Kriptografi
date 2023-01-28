@@ -2,60 +2,44 @@ from tkinter import *
 from tkinter import filedialog
 from tkinter import messagebox
 
-#melakukan enkripsi dengan constraint 26 huruf alphabet
-#input dapat berupa spasi, tetapi hasil tidak akan ada spasi dan akan otomatis jadi huruf kapital
-#plain text di luar alphabet tidak dienkripsi
+#melakukan enkripsi dengan constraint 256 karakter ASCII
+#input dapat berupa spasi, tetapi hasil tidak akan ada spasi
 def encrypt():
     if len(key.get()) == 0:
         messagebox.showerror("Error", "Key is empty")
     elif len(plain.get()) == 0:
         messagebox.showerror("Error", "Plain text is empty")
-    elif ((plain.get() >= chr(65) and plain.get() <= chr(90) or plain.get() >= chr(97) and plain.get() <= chr(122)  or plain.get().isspace == True) and (key.get() >= chr(65) and key.get() <= chr(90) or key.get() >= chr(97) and key.get() <= chr(122) or key.get().isspace == True)):
+    elif (plain.get() >= chr(0) and plain.get() <= chr(255)) and (key.get() >= chr(0) and key.get() <= chr(255)):
         keyinput = key.get()   
-        keyinput = keyinput.replace(" ", "")  
-        keyinput = keyinput.upper()
         plaintextinput = plain.get()
-        plaintextinput = plaintextinput.upper()
-        plaintextinput = plaintextinput.replace(" ", "")
         ciphertext = ""
         for i in range(len(plaintextinput)):
-            if(plaintextinput[i] >= chr(65) and plaintextinput[i] <= chr(90)):
-                ciphertext += chr(((ord(plaintextinput[i]) - 65) + (ord(keyinput[i % len(keyinput)]) - 65)) % 26 + 65)
-            else:
-                continue
+            ciphertext += chr(((ord(plaintextinput[i])) + (ord(keyinput[i % len(keyinput)]))) % 256)
         cipher.set(ciphertext)
         cipherfive.set(fiveletters(ciphertext))
-        messagebox.showinfo("Success", "Encryption success")
+        messagebox.showinfo("Success", "Encryption Success")
     else:
-        messagebox.showerror("Error", "Key and/or plain text is not alphabet")
+        messagebox.showerror("Error", "Key and/or plain text is not ASCII character")
 
 
-#melakukan dekripsi dengan constraint 26 huruf alphabet
-#input dapat berupa spasi, tetapi hasil tidak akan ada spasi dan akan otomatis jadi huruf kapital
-#cipher text di luar alphabet tidak didekripsi
+#melakukan enkripsi dengan constraint 256 karakter ASCII
+#input dapat berupa spasi, tetapi hasil tidak akan ada spasi
 def decrypt():
     if len(key.get()) == 0:
         messagebox.showerror("Error", "Key is empty")
     elif len(cipher.get()) == 0:
         messagebox.showerror("Error", "Cipher text is empty")
-    elif ((cipher.get() >= chr(65) and cipher.get() <= chr(90) or cipher.get() >= chr(97) and cipher.get() <= chr(122)  or cipher.get().isspace == True) and (key.get() >= chr(65) and key.get() <= chr(90) or key.get() >= chr(97) and key.get() <= chr(122) or key.get().isspace == True)):
+    elif (cipher.get() >= chr(0) and cipher.get() <= chr(255)) and (key.get() >= chr(0) and key.get() <= chr(255)):
         keyinput = key.get()
-        keyinput = keyinput.replace(" ", "")
-        keyinput = keyinput.upper()
         ciphertext = cipher.get()
-        ciphertext = ciphertext.upper()
-        ciphertext = ciphertext.replace(" ", "")
         plaintextinput = ""
         for i in range(len(ciphertext)):
-            if(ciphertext[i] >= chr(65) and ciphertext[i] <= chr(90)):
-                plaintextinput += chr(((ord(ciphertext[i]) - 65) - (ord(keyinput[i % len(keyinput)]) - 65)) % 26 + 65)
-            else:
-                continue
+            plaintextinput += chr(((ord(ciphertext[i])) - (ord(keyinput[i % len(keyinput)]))) % 256)
         plain.set(plaintextinput)
         plainfive.set(fiveletters(plaintextinput))
-        messagebox.showinfo("Success", "Decryption success")
+        messagebox.showinfo("Success", "Decryption Success")
     else:
-        messagebox.showerror("Error", "Key and/or plain text is not alphabet")
+        messagebox.showerror("Error", "Key and/or plain text is not ASCII character")
 
 #untuk membuka file teks dan langsung ada di kotak teks
 def openfile():
@@ -97,7 +81,7 @@ def exit():
 
 #membuat GUI dari frame, label, dan tombol
 root = Tk()
-root.title("Vigenere Cipher Standard")
+root.title("Vigenere Cipher Extended")
 root.geometry("600x400")
 root.resizable(0, 0)
 
@@ -152,3 +136,4 @@ button6.grid(row=5, column=1, sticky=W, padx=5, pady=5)
 
 
 root.mainloop()
+
