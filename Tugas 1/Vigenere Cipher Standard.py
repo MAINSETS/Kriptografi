@@ -149,7 +149,7 @@ button2.grid(row=3, column=1, sticky=W, padx=5, pady=5)
 button3 = Button(root, text="Open Text File", command=openfiletxt)
 button3.grid(row=4, column=0, sticky=W, padx=5, pady=5)
 
-button4 = Button(root, text="Open Biner File", command=openfilebiner)
+button4 = Button(root, text="Open Binary File", command=openfilebiner)
 button4.grid(row=4, column=1, sticky=W, padx=5, pady=5)
 
 button5 = Button(root, text="Save", command=savefile)
