@@ -60,7 +60,7 @@ def decrypt():
 
 #untuk membuka file teks dan langsung ada di kotak teks
 def openfiletxt():
-    file = filedialog.askopenfile(mode='r', filetypes=[('All files', '*')])
+    file = filedialog.askopenfile(mode='r', filetypes=[('Text files', 'txt')])
     if file is not None:
         content = file.read(10000)
         plain.set(content)
