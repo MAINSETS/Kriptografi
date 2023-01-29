@@ -39,7 +39,7 @@ def fiveletter(text):
 
 #fungsi untuk membuat one-time-key 50000 huruf lowecase ascii secara random
 def onetimekey():
-    S = 50000
+    S = 100000
     ran = ''.join(random.choices(string.ascii_lowercase, k = S))
     return ran
 
