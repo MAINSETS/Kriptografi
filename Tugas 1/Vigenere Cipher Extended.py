@@ -42,7 +42,14 @@ def decrypt():
         messagebox.showerror("Error", "Key and/or plain text is not ASCII character")
 
 #untuk membuka file teks dan langsung ada di kotak teks
-def openfile():
+def openfiletxt():
+    file = filedialog.askopenfile(mode='r', filetypes=[('All files', '*')])
+    if file is not None:
+        content = file.read(10000)
+        plain.set(content)
+
+#untuk membuka file nonteks
+def openfilebiner():
     file = filedialog.askopenfile(mode='rb', filetypes=[('All files', '*')])
     if file is not None:
         content = file.read(10000)
@@ -122,17 +129,20 @@ button1.grid(row=3, column=0, sticky=W, padx=5, pady=5)
 button2 = Button(root, text="Decrypt", command=decrypt)
 button2.grid(row=3, column=1, sticky=W, padx=5, pady=5)
 
-button3 = Button(root, text="Open", command=openfile)
+button3 = Button(root, text="Open Text File", command=openfiletxt)
 button3.grid(row=4, column=0, sticky=W, padx=5, pady=5)
 
-button4 = Button(root, text="Save", command=savefile)
+button4 = Button(root, text="Open Biner File", command=openfilebiner)
 button4.grid(row=4, column=1, sticky=W, padx=5, pady=5)
 
-button5 = Button(root, text="Clear", command=clear)
-button5.grid(row=5, column=0, sticky=W, padx=5, pady=5)
+button5 = Button(root, text="Save", command=savefile)
+button5.grid(row=4, column=2, sticky=W, padx=5, pady=5)
 
-button6 = Button(root, text="Exit", command=exit)
-button6.grid(row=5, column=1, sticky=W, padx=5, pady=5)
+button6 = Button(root, text="Clear", command=clear)
+button6.grid(row=5, column=0, sticky=W, padx=5, pady=5)
+
+button7 = Button(root, text="Exit", command=exit)
+button7.grid(row=5, column=1, sticky=W, padx=5, pady=5)
 
 
 root.mainloop()
