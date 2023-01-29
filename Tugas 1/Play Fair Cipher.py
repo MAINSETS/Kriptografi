@@ -1,58 +1,117 @@
-import string
 from tkinter import *
 from tkinter import filedialog
 from tkinter import messagebox
+import string
 
-#melakukan enkripsi 26 huruf alphabet dengan konversi ke huruf kapital
-#cipher text yang berupa nonalphabet yang pembacaannya diskip pada saat dekripsi, tidak bisa dikembalikan menjadi cipher text semula dengan karakter nonalphabet
-#key harus berupa alphabet
-def encrypt():
+
+#membuat GUI dari frame, label, dan tombol
+root = Tk()
+root.title("Play Fair Cipher")
+root.geometry("600x400")
+root.resizable(0, 0)
+
+key = StringVar()
+plain = StringVar()
+cipher = StringVar()
+cipherfive = StringVar()
+plainfive = StringVar()
+
+keyinput = key.get()
+keyinput = keyinput.replace(" ", "")
+keyinput = keyinput.upper()
+
+def matrix(x,y,initial):
+    return [[initial for i in range(x)] for j in range(y)]   
+
+result=list()
+for c in keyinput: 
+    if c not in result:
+        if c=='J':
+            result.append('I')
+        else:
+            result.append(c)
+flag=0
+for i in range(65,91):
+    if chr(i) not in result:
+        if i==73 and chr(74) not in result:
+            result.append("I")
+            flag=1
+        elif flag==0 and i==73 or i==74:
+            pass    
+        else:
+            result.append(chr(i))
+k=0
+my_matrix=matrix(5,5,0) 
+for i in range(0,5): 
+    for j in range(0,5):
+        my_matrix[i][j]=result[k]
+        k+=1
+
+def locindex(c):
+    loc=list()
+    if c=='J':
+        c='I'
+    for i ,j in enumerate(my_matrix):
+        for k,l in enumerate(j):
+            if c==l:
+                loc.append(i)
+                loc.append(k)
+                return loc
+            
+def encrypt(): 
     if len(key.get()) == 0:
         messagebox.showerror("Error", "Key is empty")
     elif len(plain.get()) == 0:
-        messagebox.showerror("Error", "Plain text is empty")
-    #pengecekan kunci harus alphabet
-    if (key.get() >= chr(65) and key.get() <= chr(90) or key.get() >= chr(97) and key.get() <= chr(122)):
-        keyinput = key.get()
-        keyinput = keyinput.replace(" ", "")
-        keyinput = keyinput.upper()
-        plaintextinput = plain.get()
-        plaintextinput = removeNonASCII(removeSpaces(toUpperCase(plaintextinput)))
-        ciphertext = ""
-        for i in range(len(plaintextinput)):
-            ciphertext += chr(((ord(plaintextinput[i]) - 65) + (ord(keyinput[i % len(keyinput)]) - 65)) % 26 + 65)
-        cipher.set(ciphertext)
-        cipherfive.set(fiveletters(ciphertext))
-        messagebox.showinfo("Success", "Encryption Success")
-    else:
-        messagebox.showerror("Error", "Key is not alphabet")
-
-
-#melakukan dekripsi 26 huruf alphabet dengan konversi ke huruf kapital
-#plain text yang berupa nonalphabet yang pembacaannya diskip pada saat enkripsi, tidak bisa dikembalikan menjadi plain text semula dengan karakter nonalphabet
-#key harus berupa alphabet
-def decrypt():
+        messagebox.showerror("Error", "Plain text is empty")   
+    plaintextinput = plain.get()
+    plaintextinput = removeNonASCII(removeSpaces(toUpperCase(plaintextinput)))
+    ciphertext = ""             
+    i=0
+    for s in range(0,len(plaintextinput)+1,2):
+        if s<len(plaintextinput)-1:
+            if plaintextinput[s]==plaintextinput[s+1]:
+                plaintextinput=plaintextinput[:s+1]+'X'+plaintextinput[s+1:]
+    if len(plaintextinput)%2!=0:
+        plaintextinput=plaintextinput[:]+'X'
+    while i<len(plaintextinput):
+        loc=list()
+        loc=locindex(plaintextinput[i])
+        loc1=list()
+        loc1=locindex(plaintextinput[i+1])
+        if loc[1]==loc1[1]:
+            ciphertext.format(my_matrix[(loc[0]+1)%5][loc[1]],my_matrix[(loc1[0]+1)%5][loc1[1]])
+        elif loc[0]==loc1[0]:
+            ciphertext.format(my_matrix[loc[0]][(loc[1]+1)%5],my_matrix[loc1[0]][(loc1[1]+1)%5]) 
+        else:
+            ciphertext.format(my_matrix[loc[0]][loc1[1]],my_matrix[loc1[0]][loc[1]])   
+        i=i+2 
+    cipher.set(ciphertext)
+    cipherfive.set(fiveletters(ciphertext))       
+                 
+def decrypt(): 
     if len(key.get()) == 0:
         messagebox.showerror("Error", "Key is empty")
     elif len(cipher.get()) == 0:
         messagebox.showerror("Error", "Cipher text is empty")
-    elif (key.get() >= chr(65) and key.get() <= chr(90) or key.get() >= chr(97) and key.get() <= chr(122)):
-        keyinput = key.get()
-        keyinput = keyinput.replace(" ", "")
-        keyinput = keyinput.upper()
-        ciphertext = cipher.get()
-        ciphertext = removeNonASCII(removeSpaces(toUpperCase(ciphertext)))
-        plaintextinput = ""
-        for i in range(len(ciphertext)):
-            if(ciphertext[i] >= chr(65) and ciphertext[i] <= chr(90)):
-                plaintextinput += chr(((ord(ciphertext[i]) - 65) - (ord(keyinput[i % len(keyinput)]) - 65)) % 26 + 65)
-            else:
-                continue 
-        plain.set(plaintextinput)
-        plainfive.set(fiveletters(plaintextinput))
-        messagebox.showinfo("Success", "Decryption success")
-    else:
-        messagebox.showerror("Error", "Key and chiper text is not match!")
+    ciphertext = cipher.get()
+    ciphertext = removeNonASCII(removeSpaces(toUpperCase(ciphertext)))
+    plaintextinput = ""
+    i=0
+    while i<len(ciphertext):
+        loc=list()
+        loc=locindex(ciphertext[i])
+        loc1=list()
+        loc1=locindex(ciphertext[i+1])
+        if loc[1]==loc1[1]:
+            plaintextinput.format(my_matrix[(loc[0]-1)%5][loc[1]],my_matrix[(loc1[0]-1)%5][loc1[1]])
+        elif loc[0]==loc1[0]:
+            plaintextinput.format(my_matrix[loc[0]][(loc[1]-1)%5],my_matrix[loc1[0]][(loc1[1]-1)%5])  
+        else:
+            plaintextinput.format(my_matrix[loc[0]][loc1[1]],my_matrix[loc1[0]][loc[1]])   
+        i=i+2   
+    plain.set(plaintextinput)
+    plainfive.set(fiveletters(plaintextinput))     
+
 
 #untuk membuka file teks dan langsung ada di kotak teks
 def openfiletxt():
@@ -124,17 +183,6 @@ def clear():
 def exit():
     root.destroy()
 
-#membuat GUI dari frame, label, dan tombol
-root = Tk()
-root.title("Vigenere Cipher Standard")
-root.geometry("600x400")
-root.resizable(0, 0)
-
-key = StringVar()
-plain = StringVar()
-cipher = StringVar()
-cipherfive = StringVar()
-plainfive = StringVar()
 
 label1 = Label(root, text="Key")
 label1.grid(row=0, column=0, sticky=W, padx=5, pady=5)

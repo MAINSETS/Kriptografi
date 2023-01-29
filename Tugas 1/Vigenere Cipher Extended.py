@@ -60,7 +60,7 @@ def savefile():
     if len(plain.get()) == 0:
         messagebox.showerror("Error", "Plain text is empty")
     else:
-        file = filedialog.asksaveasfile(mode='w', defaultextension=".txt")
+        file = filedialog.asksaveasfile(mode='w', filetypes=[('Text files', 'txt')])
         if file is not None:
             file.write(plain.get())
             file.close()

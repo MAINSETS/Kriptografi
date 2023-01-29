@@ -31,7 +31,6 @@ def encrypt():
             cipher.set(ciphertext)
             cipherfive.set(fiveletters(ciphertext))
             messagebox.showinfo("Success", "Encryption Success")
-            print(newkeyinput)
     else:
         messagebox.showerror("Error", "Key is not alphabet")
 
