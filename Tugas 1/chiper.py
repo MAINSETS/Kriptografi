@@ -1,9 +1,9 @@
 import string
 import random
 
-#fungsi mengubah semua text menjadi lower case
-def toLowerCase(text):
-	return text.lower()
+#fungsi mengubah semua text menjadi upper case
+def toUpperCase(text):
+	return text.upper()
 
 #fungsi menghapus spasi
 def removeSpaces(text):
@@ -17,10 +17,10 @@ def removeSpaces(text):
 
 #fungsi menghapus karakter non-alfabet 
 def removeNonASCII(text):
-    text.lower()
+    text.upper()
     newtext = ""
     for i in text:
-        if i not in string.ascii_lowercase:
+        if i not in string.ascii_uppercase:
             continue
         else:
             newtext = newtext + i
@@ -53,7 +53,7 @@ def save(text):
 
 #testing
 plaintext = 'Mayo@na1is buKAN insTr3umen'
-plaintext = removeNonASCII(removeSpaces(toLowerCase(plaintext)))
+plaintext = removeNonASCII(removeSpaces(toUpperCase(plaintext)))
 #print(plaintext)
 
 chippertext = 'qwertyuiopasdfg'

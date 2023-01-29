@@ -1,3 +1,4 @@
+import string
 from tkinter import *
 from tkinter import filedialog
 from tkinter import messagebox
@@ -12,18 +13,14 @@ def encrypt():
         messagebox.showerror("Error", "Plain text is empty")
     #pengecekan kunci harus alphabet
     if (key.get() >= chr(65) and key.get() <= chr(90) or key.get() >= chr(97) and key.get() <= chr(122)):
-        keyinput = key.get()   
-        keyinput = keyinput.replace(" ", "")  
+        keyinput = key.get()
+        keyinput = keyinput.replace(" ", "")
         keyinput = keyinput.upper()
         plaintextinput = plain.get()
-        plaintextinput = plaintextinput.upper()
-        plaintextinput = plaintextinput.replace(" ", "")
+        plaintextinput = removeNonASCII(removeSpaces(toUpperCase(plaintextinput)))
         ciphertext = ""
         for i in range(len(plaintextinput)):
-            if(plaintextinput[i] >= chr(65) and plaintextinput[i] <= chr(90)):
-                ciphertext += chr(((ord(plaintextinput[i]) - 65) + (ord(keyinput[i % len(keyinput)]) - 65)) % 26 + 65)
-            else:
-                continue
+            ciphertext += chr(((ord(plaintextinput[i]) - 65) + (ord(keyinput[i % len(keyinput)]) - 65)) % 26 + 65)
         cipher.set(ciphertext)
         cipherfive.set(fiveletters(ciphertext))
         messagebox.showinfo("Success", "Encryption Success")
@@ -91,6 +88,31 @@ def fiveletters(text):
             newtext = newtext + " "
         newtext = newtext + i
         count = count + 1
+    return newtext
+
+#fungsi mengubah semua text menjadi upper case
+def toUpperCase(text):
+	return text.upper()
+
+#fungsi menghapus spasi
+def removeSpaces(text):
+	newtext = ""
+	for i in text:
+		if i == " ":
+			continue
+		else:
+			newtext = newtext + i
+	return newtext
+
+#fungsi menghapus karakter non-alfabet 
+def removeNonASCII(text):
+    text.upper()
+    newtext = ""
+    for i in text:
+        if i not in string.ascii_uppercase:
+            continue
+        else:
+            newtext = newtext + i
     return newtext
 
 #menghapus semua kotak
