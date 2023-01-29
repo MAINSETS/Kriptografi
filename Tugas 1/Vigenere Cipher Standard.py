@@ -3,7 +3,8 @@ from tkinter import filedialog
 from tkinter import messagebox
 
 #melakukan enkripsi 26 huruf alphabet dengan konversi ke huruf kapital
-#plaintext dapat berupa non-alphabet, tetapi pembacaannya diskip
+#cipher text yang berupa nonalphabet yang pembacaannya diskip pada saat dekripsi, tidak bisa dikembalikan menjadi cipher text semula dengan karakter nonalphabet
+#key harus berupa alphabet
 def encrypt():
     if len(key.get()) == 0:
         messagebox.showerror("Error", "Key is empty")
@@ -30,13 +31,15 @@ def encrypt():
         messagebox.showerror("Error", "Key is not alphabet")
 
 
-#melakukan dekripsi 26 huruf alphabet
+#melakukan dekripsi 26 huruf alphabet dengan konversi ke huruf kapital
+#plain text yang berupa nonalphabet yang pembacaannya diskip pada saat enkripsi, tidak bisa dikembalikan menjadi plain text semula dengan karakter nonalphabet
+#key harus berupa alphabet
 def decrypt():
     if len(key.get()) == 0:
         messagebox.showerror("Error", "Key is empty")
     elif len(cipher.get()) == 0:
         messagebox.showerror("Error", "Cipher text is empty")
-    elif ((cipher.get() >= chr(65) and cipher.get() <= chr(90) or cipher.get() >= chr(97) and cipher.get() <= chr(122)  or cipher.get().isspace == True) and (key.get() >= chr(65) and key.get() <= chr(90) or key.get() >= chr(97) and key.get() <= chr(122) or key.get().isspace == True)):
+    elif (key.get() >= chr(65) and key.get() <= chr(90) or key.get() >= chr(97) and key.get() <= chr(122)):
         keyinput = key.get()
         keyinput = keyinput.replace(" ", "")
         keyinput = keyinput.upper()
@@ -57,16 +60,10 @@ def decrypt():
 
 #untuk membuka file teks dan langsung ada di kotak teks
 def openfile():
-    try:
-        file = filedialog.askopenfile(mode='r', filetypes=[('All files', '*')])
-        if file is not None:
-            content = file.read(10000)
-            plain.set(content)
-    except:
-        file = filedialog.askopenfile(mode='rb', filetypes=[('All files', '*')])
-        if file is not None:
-            content = file.read(10000)
-            plain.set(content)
+    file = filedialog.askopenfile(mode='rb', filetypes=[('All files', '*')])
+    if file is not None:
+        content = file.read(10000)
+        plain.set(content)
 
 #fitur untuk menyimpan file teks jika sudah dienkripsi/didekripsi
 def savefile():
