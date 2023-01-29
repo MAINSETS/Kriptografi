@@ -51,9 +51,9 @@ def decrypt():
             if(ciphertext[i] >= chr(65) and ciphertext[i] <= chr(90)):
                 plaintextinput += chr(((ord(ciphertext[i]) - 65) - (ord(keyinput[i % len(keyinput)]) - 65)) % 26 + 65)
             else:
-                continue
-        plain.set(plaintextinput)
-        plainfive.set(fiveletters(plaintextinput))
+                continue 
+        plain.set(plaintextinput )
+        plainfive.set(fiveletters(plaintextinput ))
         messagebox.showinfo("Success", "Decryption success")
     else:
         messagebox.showerror("Error", "Key and chiper text is not match!")

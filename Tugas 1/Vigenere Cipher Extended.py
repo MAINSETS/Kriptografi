@@ -19,7 +19,7 @@ def encrypt():
         cipherfive.set(fiveletters(ciphertext))
         messagebox.showinfo("Success", "Encryption Success")
     else:
-        messagebox.showerror("Error", "Key and/or plain text is not ASCII character")
+        messagebox.showerror("Error", "Key and/or plain text is not in this 256 ASCII characters")
 
 
 #melakukan enkripsi dengan constraint 256 karakter ASCII
@@ -39,7 +39,7 @@ def decrypt():
         plainfive.set(fiveletters(plaintextinput))
         messagebox.showinfo("Success", "Decryption Success")
     else:
-        messagebox.showerror("Error", "Key and/or plain text is not ASCII character")
+        messagebox.showerror("Error", "Key and/or plain text is not in this 256 ASCII characters")
 
 #untuk membuka file teks dan langsung ada di kotak teks
 def openfiletxt():
