@@ -1,5 +1,4 @@
 from pydoc import plain
-import numpy as np
 import random as rd
 from tkinter import *
 from tkinter import filedialog
@@ -8,10 +7,10 @@ from tkinter import messagebox
 def remove(string):
     return string.replace(" ","")
 
-alphabets=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y']
+alphabets=['a','b','c','d','e','f','g','h','i','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 
 
-def genkey(text):
+def getkey(text):
     key=[]
     for i in text:
         if i not in key:
@@ -22,7 +21,7 @@ def genkey(text):
             key.append(i)
     return key
 
-def genmatrix(key):
+def getmatrix(key):
     matrix=[[]]
     # print(key)
     i=0
@@ -62,8 +61,8 @@ def changeplain(row,col,matrix):
 def encryption():
     msg=entry.get()
     text=keyy.get()
-    key=genkey(text)
-    matrix=genmatrix(key)
+    key=getkey(text)
+    matrix=getmatrix(key)
     plain=createplain(msg)
     start=[]
     cipher=[]
@@ -112,8 +111,8 @@ def change(row,col,matrix):
 def decryption():
     msg=encryption()
     text=keyy.get()
-    key=genkey(text)
-    matrix=genmatrix(key)
+    key=getkey(text)
+    matrix=getmatrix(key)
     plain=createplain(msg)
     start=[]
     cipher=[]
@@ -196,8 +195,10 @@ def fiveletters(text):
 #menghapus semua kotak
 def clear():
     keyy.set("")
-    plain.set("")
-    entry.set("")
+    msg.set("")
+    plainfive.set("")
+    cipher.set("")
+    cipherfive.set("")
 
 #keluar dari program
 def exit():
@@ -206,33 +207,36 @@ def exit():
 playfair=Tk()
 
 msg = StringVar()
-text = StringVar()
-plain = StringVar()
+keyy = StringVar()
 cipher = StringVar()
 plainfive = StringVar()
+cipher = StringVar()
+cipherfive = StringVar()
 
 label1=Label(playfair,text="Playfair Cipher" ,padx=5,pady=5)
 label1.pack(padx=30,pady=30)
-
 frame=LabelFrame(playfair,text="",padx=60,pady=60)
 frame.pack(padx=30,pady=30)
 
-label=Label(frame,text="Enter message" ,padx=5,pady=5)
-label.grid(row=1,column=0)
-
+label2=Label(frame,text="Enter message" ,padx=5,pady=5)
+label2.grid(row=1,column=0)
 entry=Entry(frame)
 entry.grid(row=1,column=1)
 
-label=Label(frame,text="Enter key" ,padx=5,pady=5)
-label.grid(row=2,column=0)
-
+label3=Label(frame,text="Enter key" ,padx=5,pady=5)
+label3.grid(row=2,column=0)
 keyy=Entry(frame)
 keyy.grid(row=2,column=1)
 
-label3 = Label(frame, text="Plain Text 5 Letters Group")
-label3.grid(row=1, column=2, sticky=W, padx=5, pady=5)
-entry3 = Entry(frame, textvariable=plainfive)
-entry3.grid(row=1, column=3, sticky=W, padx=5, pady=5)
+label4 = Label(frame, text="Plain Text 5 Letters Group")
+label4.grid(row=1, column=2, sticky=W, padx=5, pady=5)
+entry4 = Entry(frame, textvariable=plainfive)
+entry4.grid(row=1, column=3, sticky=W, padx=5, pady=5)
+
+label5 = Label(frame, text="Cipher Text 5 Letters Group")
+label5.grid(row=2, column=2, sticky=W, padx=5, pady=5)
+entry5 = Entry(frame, textvariable=cipherfive)
+entry5.grid(row=2, column=3, sticky=W, padx=5, pady=5)
 
 button1=Button(frame,text="Encrypt",command=encryption)
 button1.grid(row=1,column=5)

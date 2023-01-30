@@ -81,6 +81,8 @@ def clear():
     key.set("")
     plain.set("")
     cipher.set("")
+    plainfive.set("")
+    cipherfive.set("")
 
 #keluar dari program
 def exit():
