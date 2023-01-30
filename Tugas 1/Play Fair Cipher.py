@@ -2,6 +2,8 @@ from pydoc import plain
 import numpy as np
 import random as rd
 from tkinter import *
+from tkinter import filedialog
+from tkinter import messagebox
 
 def remove(string):
     return string.replace(" ","")
@@ -98,9 +100,9 @@ def encryption():
         else:
             cipher.append(changeplain(r1,c2,matrix))
             cipher.append(changeplain(r2,c1,matrix))
-    label=Label(frame,text="Encryption:",font=(20,20) ,padx=10,pady=10)
+    label=Label(frame,text="Encryption:" ,padx=5,pady=5)
     label.grid(row=3,column=0)
-    label=Label(frame,text=cipher,font=(20,20) ,padx=10,pady=10)
+    label=Label(frame,text=cipher ,padx=5,pady=5)
     label.grid(row=3,column=1)
     return cipher
 
@@ -151,35 +153,106 @@ def decryption():
             print(r1,c1,r2,c2)
             cipher.append(change(r1,c2,matrix))
             cipher.append(change(r2,c1,matrix))
-    label=Label(frame,text="Decryption:",font=(20,20) ,padx=10,pady=10)
+    label=Label(frame,text="Decryption:" ,padx=5,pady=5)
     label.grid(row=4,column=0)
-    label=Label(frame,text=cipher,font=(20,20) ,padx=10,pady=10)
+    label=Label(frame,text=cipher,padx=5,pady=5)
     label.grid(row=4,column=1)
+
+#untuk membuka file teks dan langsung ada di kotak teks
+def openfiletxt():
+    file = filedialog.askopenfile(mode='r', filetypes=[('Text files', 'txt')])
+    if file is not None:
+        content = file.read(10000)
+        plain.set(content)
+
+#untuk membuka file nonteks
+def openfilebiner():
+    file = filedialog.askopenfile(mode='rb', filetypes=[('All files', '*')])
+    if file is not None:
+        content = file.read(10000)
+        plain.set(content)
+
+#fitur untuk menyimpan file teks jika sudah dienkripsi/didekripsi
+def savefile():
+    if len(plain.get()) == 0:
+        messagebox.showerror("Error", "Plain text is empty")
+    else:
+        file = filedialog.asksaveasfile(mode='w', filetypes=[('Text files', 'txt')])
+        if file is not None:
+            file.write(plain.get())
+            file.close()
+
+#fungsi menampilkan text dalam kelompok 5 huruf
+def fiveletters(text):
+    newtext = ""
+    count = 0
+    for i in text:
+        if count%5 == 0:
+            newtext = newtext + " "
+        newtext = newtext + i
+        count = count + 1
+    return newtext
+
+#menghapus semua kotak
+def clear():
+    keyy.set("")
+    plain.set("")
+    entry.set("")
+
+#keluar dari program
+def exit():
+    frame.destroy()
 
 playfair=Tk()
 
-label1=Label(playfair,text="Playfair Cipher",font=(30,30) ,padx=10,pady=10)
+msg = StringVar()
+text = StringVar()
+plain = StringVar()
+cipher = StringVar()
+plainfive = StringVar()
+
+label1=Label(playfair,text="Playfair Cipher" ,padx=5,pady=5)
 label1.pack(padx=30,pady=30)
 
 frame=LabelFrame(playfair,text="",padx=60,pady=60)
 frame.pack(padx=30,pady=30)
 
-label=Label(frame,text="Enter message",font=(20,20) ,padx=10,pady=10)
+label=Label(frame,text="Enter message" ,padx=5,pady=5)
 label.grid(row=1,column=0)
 
-entry=Entry(frame,font=(20,20))
+entry=Entry(frame)
 entry.grid(row=1,column=1)
 
-label=Label(frame,text="Enter key",font=(20,20) ,padx=10,pady=10)
+label=Label(frame,text="Enter key" ,padx=5,pady=5)
 label.grid(row=2,column=0)
 
-keyy=Entry(frame,font=(20,20))
+keyy=Entry(frame)
 keyy.grid(row=2,column=1)
 
-button=Button(frame,text="Encrypt",command=encryption)
-button.grid(row=1,column=2)
+label3 = Label(frame, text="Plain Text 5 Letters Group")
+label3.grid(row=1, column=2, sticky=W, padx=5, pady=5)
+entry3 = Entry(frame, textvariable=plainfive)
+entry3.grid(row=1, column=3, sticky=W, padx=5, pady=5)
 
-button=Button(frame,text="Decrypt",command=decryption)
-button.grid(row=1,column=3)
+button1=Button(frame,text="Encrypt",command=encryption)
+button1.grid(row=1,column=5)
+
+button2=Button(frame,text="Decrypt",command=decryption)
+button2.grid(row=2,column=5)
+
+button3 = Button(frame, text="Open Text File", command=openfiletxt)
+button3.grid(row=4, column=0, sticky=W, padx=5, pady=5)
+
+button4 = Button(frame, text="Open Binary File", command=openfilebiner)
+button4.grid(row=4, column=1, sticky=W, padx=5, pady=5)
+
+button5 = Button(frame, text="Save", command=savefile)
+button5.grid(row=4, column=2, sticky=W, padx=5, pady=5)
+
+button6 = Button(frame, text="Clear", command=clear)
+button6.grid(row=5, column=0, sticky=W, padx=5, pady=5)
+
+button7 = Button(frame, text="Exit", command=exit)
+button7.grid(row=5, column=1, sticky=W, padx=5, pady=5)
 
 playfair.mainloop()
