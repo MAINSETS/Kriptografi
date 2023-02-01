@@ -7,6 +7,8 @@ from tkinter import messagebox
 def encryption():
     if len(plain.get()) == 0:
         messagebox.showerror("Error", "Plain text is empty")
+    elif len(keyy.get()) == 0:
+        messagebox.showerror("Error", "Key is empty")
     else:
         key = keyy.get()
         key = key.upper()
@@ -72,8 +74,10 @@ def encryption():
         
 #fungsi untuk mendekripsi pesan
 def decryption():
-    if len(plain.get()) == 0:
+    if len(cipher.get()) == 0:
         messagebox.showerror("Error", "Plain text is empty")
+    elif len(keyy.get()) == 0:
+        messagebox.showerror("Error", "Key is empty")
     else:
         key = keyy.get()
         key = key.upper()
@@ -129,6 +133,27 @@ def decryption():
         msg1 = "".join(msg1)
         plain.set(msg1)
         plainfive.set(fiveletters(msg1))
+
+#menampilkan matriks 5x5
+def displaymatrix():
+    if len(keyy.get()) == 0:
+        messagebox.showerror("Error", "Key is empty")
+    else:
+        key = keyy.get()
+        key = key.upper()
+        key = key.replace(" ", "")
+        key = list(key)
+        key = list(dict.fromkeys(key))
+        key = "".join(key)
+        key = key.replace("J", "I")
+        key = list(key)
+        alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ"
+        alphabet = list(alphabet)
+        for i in key:
+            alphabet.remove(i)
+        key = key + alphabet
+        matrix = [key[0:5], key[5:10], key[10:15], key[15:20], key[20:25]]
+        messagebox.showinfo("Matrix", matrix)
 
 
 #untuk membuka file teks dan langsung ada di kotak teks
@@ -199,7 +224,7 @@ entry2.grid(row=1, column=1, sticky=W, padx=5, pady=5)
 
 label3 = Label(root, text="Plain Text 5 Letters Group")
 label3.grid(row=1, column=2, sticky=W, padx=5, pady=5)
-entry3 = Entry(root, textvariable=plainfive)
+entry3 = Entry(root, textvariable=plainfive, state=DISABLED)
 entry3.grid(row=1, column=3, sticky=W, padx=5, pady=5)
 
 label4 = Label(root, text="Cipher Text")
@@ -209,14 +234,14 @@ entry4.grid(row=2, column=1, sticky=W, padx=5, pady=5)
 
 label5 = Label(root, text="Cipher Text 5 Letters Group")
 label5.grid(row=2, column=2, sticky=W, padx=5, pady=5)
-entry5 = Entry(root, textvariable=cipherfive)
+entry5 = Entry(root, textvariable=cipherfive,state=DISABLED)
 entry5.grid(row=2, column=3, sticky=W, padx=5, pady=5)
 
 button1=Button(root,text="Encrypt",command=encryption)
-button1.grid(row=1,column=5)
+button1.grid(row=3,column=0, sticky=W, padx=5, pady=5)
 
 button2=Button(root,text="Decrypt",command=decryption)
-button2.grid(row=2,column=5)
+button2.grid(row=3,column=1, sticky=W, padx=5, pady=5)
 
 button3 = Button(root, text="Open Text File", command=openfiletxt)
 button3.grid(row=4, column=0, sticky=W, padx=5, pady=5)
@@ -232,5 +257,8 @@ button6.grid(row=5, column=0, sticky=W, padx=5, pady=5)
 
 button7 = Button(root, text="Exit", command=exit)
 button7.grid(row=5, column=1, sticky=W, padx=5, pady=5)
+
+button8 = Button(root, text="Display Matrix", command=displaymatrix)
+button8.grid(row=5, column=2, sticky=W, padx=5, pady=5)
 
 root.mainloop()

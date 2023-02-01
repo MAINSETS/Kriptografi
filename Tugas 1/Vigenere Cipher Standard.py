@@ -150,7 +150,7 @@ entry2.grid(row=1, column=1, sticky=W, padx=5, pady=5)
 
 label3 = Label(root, text="Plain Text 5 Letters Group")
 label3.grid(row=1, column=2, sticky=W, padx=5, pady=5)
-entry3 = Entry(root, textvariable=plainfive)
+entry3 = Entry(root, textvariable=plainfive, state=DISABLED)
 entry3.grid(row=1, column=3, sticky=W, padx=5, pady=5)
 
 label4 = Label(root, text="Cipher Text")
@@ -160,7 +160,7 @@ entry4.grid(row=2, column=1, sticky=W, padx=5, pady=5)
 
 label5 = Label(root, text="Cipher Text 5 Letters Group")
 label5.grid(row=2, column=2, sticky=W, padx=5, pady=5)
-entry5 = Entry(root, textvariable=cipherfive)
+entry5 = Entry(root, textvariable=cipherfive, state=DISABLED)
 entry5.grid(row=2, column=3, sticky=W, padx=5, pady=5)
 
 button1 = Button(root, text="Encrypt", command=encrypt)
