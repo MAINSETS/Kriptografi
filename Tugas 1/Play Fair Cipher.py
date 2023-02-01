@@ -248,6 +248,9 @@ def exit():
     root.destroy()
 
 root=Tk()
+root.title("Play Fair Cipher")
+root.geometry("600x400")
+root.resizable(0, 0)
 
 plain = StringVar()
 keyy = StringVar()
