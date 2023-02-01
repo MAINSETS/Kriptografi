@@ -159,7 +159,6 @@ def matrix():
         matrix = [key[0:5], key[5:10], key[10:15], key[15:20], key[20:25]]
         return matrix
 
-
 def displaymatrix(table): 
     res1 = '[{}]\n'.format(' '.join(table[0]))
     res2 = ''
@@ -168,7 +167,8 @@ def displaymatrix(table):
     res3 = '[{}]\n'.format(' '.join(table[len(table)-1]))
     res = res1 + res2 + res3
     messagebox.showinfo("Matrix", res)
-
+    print("Matrix", matrix)
+    messagebox.showinfo("Matrix", matrix)
 
 #untuk membuka file teks dan langsung ada di kotak teks
 def openfiletxt():
