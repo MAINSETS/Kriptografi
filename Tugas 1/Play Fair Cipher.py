@@ -3,9 +3,8 @@ import random as rd
 from tkinter import *
 from tkinter import filedialog
 from tkinter import messagebox
-
 #fungsi untuk mengenkripsi pesan
-def encryption():
+def encrypt():
     if len(plain.get()) == 0:
         messagebox.showerror("Error", "Plain text is empty")
     elif len(keyy.get()) == 0:
@@ -76,7 +75,7 @@ def encryption():
 
         
 #fungsi untuk mendekripsi pesan
-def decryption():
+def decrypt():
     if len(cipher.get()) == 0:
         messagebox.showerror("Error", "Plain text is empty")
     elif len(keyy.get()) == 0:
@@ -282,10 +281,10 @@ label5.grid(row=2, column=2, sticky=W, padx=5, pady=5)
 entry5 = Entry(root, textvariable=cipherfive,state=DISABLED)
 entry5.grid(row=2, column=3, sticky=W, padx=5, pady=5)
 
-button1=Button(root,text="Encrypt",command=encryption)
+button1=Button(root,text="Encrypt",command=encrypt)
 button1.grid(row=3,column=0, sticky=W, padx=5, pady=5)
 
-button2=Button(root,text="Decrypt",command=decryption)
+button2=Button(root,text="Decrypt",command=decrypt)
 button2.grid(row=3,column=1, sticky=W, padx=5, pady=5)
 
 button3 = Button(root, text="Open Text File", command=openfiletxt)
