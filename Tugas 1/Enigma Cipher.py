@@ -1,5 +1,3 @@
-#buatlah program enigma cipher dengan 3 rotor dengan 26 huruf alphabet dengan melengkapi kode yang ada
-
 import string
 import random
 import string
