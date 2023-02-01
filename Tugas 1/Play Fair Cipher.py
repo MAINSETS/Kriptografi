@@ -1,3 +1,4 @@
+import string
 import random as rd
 from tkinter import *
 from tkinter import filedialog
@@ -11,19 +12,20 @@ def encryption():
         messagebox.showerror("Error", "Key is empty")
     else:
         key = keyy.get()
-        key = key.upper()
-        key = key.replace(" ", "")
-        key = list(key)
-        key = list(dict.fromkeys(key))
-        key = "".join(key)
-        key = key.replace("J", "I")
-        key = list(key)
+        #menghapus spasi, karakter non-ascii, dan huruf J pada key, ubah ke huruf besar
+        key = removeNonASCII(removeSpacesJ(toUpperCase(key)))
+        #menghapus duplikasi huruf
+        key = "".join(dict.fromkeys(key))
+        #menambahkan key dengan backkey: berupa huruf yang belum ada pada key
+        backkey = ""
         alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ"
-        alphabet = list(alphabet)
-        for i in key:
-            alphabet.remove(i)
-        key = key + alphabet
+        for i in alphabet:
+            if i not in key:
+                backkey = backkey + i
+        key = key + backkey
+        #membuat matrix key
         matrix = [key[0:5], key[5:10], key[10:15], key[15:20], key[20:25]]
+        
         msg1 = plain.get()
         msg1 = msg1.upper()
         msg1 = msg1.replace(" ", "")
@@ -80,19 +82,20 @@ def decryption():
         messagebox.showerror("Error", "Key is empty")
     else:
         key = keyy.get()
-        key = key.upper()
-        key = key.replace(" ", "")
-        key = list(key)
-        key = list(dict.fromkeys(key))
-        key = "".join(key)
-        key = key.replace("J", "I")
-        key = list(key)
+        #menghapus spasi, karakter non-ascii, dan huruf J pada key, ubah ke huruf besar
+        key = removeNonASCII(removeSpacesJ(toUpperCase(key)))
+        #menghapus duplikasi huruf
+        key = "".join(dict.fromkeys(key))
+        #menambahkan key dengan backkey berupa huruf yang belum ada pada key
+        backkey = ""
         alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ"
-        alphabet = list(alphabet)
-        for i in key:
-            alphabet.remove(i)
-        key = key + alphabet
+        for i in alphabet:
+            if i not in key:
+                backkey = backkey + i
+        key = key + backkey
+        #membuat matrix key
         matrix = [key[0:5], key[5:10], key[10:15], key[15:20], key[20:25]]
+        
         msg1 = plain.get()
         msg1 = msg1.upper()
         msg1 = msg1.replace(" ", "")
@@ -140,19 +143,21 @@ def displaymatrix():
         messagebox.showerror("Error", "Key is empty")
     else:
         key = keyy.get()
-        key = key.upper()
-        key = key.replace(" ", "")
-        key = list(key)
-        key = list(dict.fromkeys(key))
-        key = "".join(key)
-        key = key.replace("J", "I")
-        key = list(key)
+        #menghapus spasi, karakter non-ascii, dan huruf J pada key, ubah ke huruf besar
+        key = removeNonASCII(removeSpacesJ(toUpperCase(key)))
+        #menghapus duplikasi huruf
+        key = "".join(dict.fromkeys(key))
+        #menambahkan key dengan backkey berupa huruf yang belum ada pada key
+        backkey = ""
         alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ"
-        alphabet = list(alphabet)
-        for i in key:
-            alphabet.remove(i)
-        key = key + alphabet
+        for i in alphabet:
+            if i not in key:
+                backkey = backkey + i
+        key = key + backkey
+        key = list(key)
+        #membuat matrix key
         matrix = [key[0:5], key[5:10], key[10:15], key[15:20], key[20:25]]
+        print("Matrix", matrix)
         messagebox.showinfo("Matrix", matrix)
 
 
@@ -189,6 +194,31 @@ def fiveletters(text):
             newtext = newtext + " "
         newtext = newtext + i
         count = count + 1
+    return newtext
+
+#fungsi mengubah semua text menjadi upper case
+def toUpperCase(text):
+	return text.upper()
+
+#fungsi menghapus spasi dan J
+def removeSpacesJ(text):
+	newtext = ""
+	for i in text:
+		if i == " " or i == "J":
+			continue
+		else:
+			newtext = newtext + i
+	return newtext
+
+#fungsi menghapus karakter non-alfabet 
+def removeNonASCII(text):
+    text.upper()
+    newtext = ""
+    for i in text:
+        if i not in string.ascii_uppercase:
+            continue
+        else:
+            newtext = newtext + i
     return newtext
 
 #menghapus semua kotak

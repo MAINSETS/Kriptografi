@@ -26,6 +26,16 @@ def removeNonASCII(text):
             newtext = newtext + i
     return newtext
 
+#fungsi menghapus spasi dan J
+def removeSpacesJ(text):
+	newtext = ""
+	for i in text:
+		if i == " " or i == "J":
+			continue
+		else:
+			newtext = newtext + i
+	return newtext
+
 #fungsi menampilkan text dalam kelompok 5 huruf
 def fiveletter(text):
     newtext = ""
@@ -64,3 +74,17 @@ chippertext = fiveletter(chippertext)
 #print(onetimekey())
 
 
+alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ"
+key = "aku23mau31mandi"
+#menghapus spasi, karakter non-ascii, dan huruf J pada key, ubah ke huruf besar
+key = removeNonASCII(removeSpacesJ(toUpperCase(key)))
+#menghapus duplikasi huruf
+key = "".join(dict.fromkeys(key))
+#menambahkan key dengan backkey berupa huruf yang belum ada pada key
+backkey = ""
+for i in alphabet:
+    if i not in key:
+        backkey = backkey + i
+key = key + backkey
+#print(key)
+#print(backkey)
