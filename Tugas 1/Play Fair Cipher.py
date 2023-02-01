@@ -36,8 +36,8 @@ def encryption():
             if msg1[i] == msg1[i + 1]:
                 msg1.insert(i + 1, "X")
             i = i + 2
-        if len(msg1) % 2 != 0:
-            msg1.append("X")
+            if len(msg1) % 2 != 0:
+                msg1.append("X")
         i = 0
         while i < len(msg1):
             a = 0
@@ -167,8 +167,6 @@ def displaymatrix(table):
     res3 = '[{}]\n'.format(' '.join(table[len(table)-1]))
     res = res1 + res2 + res3
     messagebox.showinfo("Matrix", res)
-    print("Matrix", matrix)
-    messagebox.showinfo("Matrix", matrix)
 
 #untuk membuka file teks dan langsung ada di kotak teks
 def openfiletxt():
