@@ -71,8 +71,9 @@ def encryption():
                 msg1[i + 1] = matrix[c][b]
             i = i + 2
         msg1 = "".join(msg1)
-        cipher.set(msg1)
-        cipherfive.set(fiveletters(msg1))
+    cipher.set(msg1)
+    cipherfive.set(fiveletters(msg1))
+
         
 #fungsi untuk mendekripsi pesan
 def decryption():
@@ -96,11 +97,18 @@ def decryption():
         #membuat matrix key
         matrix = [key[0:5], key[5:10], key[10:15], key[15:20], key[20:25]]
         
-        msg1 = plain.get()
+        msg1 = cipher.get()
         msg1 = msg1.upper()
         msg1 = msg1.replace(" ", "")
         msg1 = msg1.replace("J", "I")
         msg1 = list(msg1)
+        i = 0
+        while i < len(msg1):
+            if msg1[i] == msg1[i + 1]:
+                msg1.insert(i + 1, "X")
+            i = i + 2
+            if len(msg1) % 2 != 0:
+                msg1.append("X")
         i = 0
         while i < len(msg1):
             a = 0
@@ -134,8 +142,8 @@ def decryption():
                 msg1[i + 1] = matrix[c][b]
             i = i + 2
         msg1 = "".join(msg1)
-        plain.set(msg1)
-        plainfive.set(fiveletters(msg1))
+    plain.set(msg1)
+    plainfive.set(fiveletters(msg1))
 
 #menampilkan matriks 5x5
 def matrix():
