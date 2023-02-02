@@ -26,8 +26,7 @@ def encrypt():
         matrix = [key[0:5], key[5:10], key[10:15], key[15:20], key[20:25]]
         
         msg1 = plain.get()
-        msg1 = msg1.upper()
-        msg1 = msg1.replace(" ", "")
+        msg1= removeNonASCII(removeSpaces(toUpperCase(msg1)))
         msg1 = msg1.replace("J", "I")
         msg1 = list(msg1)
         i = 0
@@ -72,6 +71,7 @@ def encrypt():
         msg1 = "".join(msg1)
     cipher.set(msg1)
     cipherfive.set(fiveletters(msg1))
+    messagebox.showinfo("Success", "Encryption Success")
 
         
 #fungsi untuk mendekripsi pesan
@@ -97,8 +97,7 @@ def decrypt():
         matrix = [key[0:5], key[5:10], key[10:15], key[15:20], key[20:25]]
         
         msg1 = cipher.get()
-        msg1 = msg1.upper()
-        msg1 = msg1.replace(" ", "")
+        msg1= removeNonASCII(removeSpaces(toUpperCase(msg1)))
         msg1 = msg1.replace("J", "I")
         msg1 = list(msg1)
         i = 0
@@ -143,6 +142,7 @@ def decrypt():
         msg1 = "".join(msg1)
     plain.set(msg1)
     plainfive.set(fiveletters(msg1))
+    messagebox.showinfo("Success", "Decryption success")
 
 #menampilkan matriks 5x5
 def matrix():
@@ -213,6 +213,16 @@ def fiveletters(text):
 #fungsi mengubah semua text menjadi upper case
 def toUpperCase(text):
 	return text.upper()
+
+#fungsi menghapus spasi
+def removeSpaces(text):
+	newtext = ""
+	for i in text:
+		if i == " ":
+			continue
+		else:
+			newtext = newtext + i
+	return newtext
 
 #fungsi menghapus spasi dan J
 def removeSpacesJ(text):
