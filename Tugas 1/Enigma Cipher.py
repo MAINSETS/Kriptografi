@@ -1,5 +1,4 @@
 def encrypt(plaintext, key1, key2, key3):
-    """Encrypts plaintext using the Enigma cipher with three rotors and given keys"""
     ciphertext = ""
     for char in plaintext:
         char = chr((ord(char) + key1) % 126)
@@ -9,7 +8,6 @@ def encrypt(plaintext, key1, key2, key3):
     return ciphertext
 
 def decrypt(ciphertext, key1, key2, key3):
-    """Decrypts ciphertext using the Enigma cipher with three rotors and given keys"""
     plaintext = ""
     for char in ciphertext:
         char = chr((ord(char) - key3 + 126) % 126)
@@ -19,7 +17,7 @@ def decrypt(ciphertext, key1, key2, key3):
     return plaintext
 
 # Testing the Enigma cipher with three rotors
-plaintext = "HELLO WORLD"
+plaintext = "uwaki"
 key1 = 5
 key2 = 11
 key3 = 23

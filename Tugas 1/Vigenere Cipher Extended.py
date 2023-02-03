@@ -46,14 +46,14 @@ def decrypt():
 def openfiletxt():
     file = filedialog.askopenfile(mode='r', filetypes=[('Text files', 'txt')])
     if file is not None:
-        content = file.read(10000)
+        content = file.read()
         plain.set(content)
 
 # Fungsi untuk membuka file binary
 def openfilebiner():
     file = filedialog.askopenfile(mode='rb', filetypes=[('All files', '*')])
     data = file.read()
-    data_str = data.decode('utf-8')
+    data_str = data.decode('latin-1')
     plain.set(data_str)
 
 #fitur untuk menyimpan file teks jika sudah dienkripsi/didekripsi
@@ -70,7 +70,7 @@ def savefile():
 def savefilebiner():
     file = filedialog.asksaveasfile(mode='wb', filetypes=[('All files', '*')])
     text = plain.get()
-    data = text.encode('utf-8')
+    data = text.encode('latin-1')
     file.write(data)
     file.close()
 
