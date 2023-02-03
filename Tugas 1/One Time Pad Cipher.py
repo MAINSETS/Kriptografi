@@ -158,9 +158,6 @@ label1.grid(row=0, column=0, sticky=W, padx=5, pady=5)
 entry1 = Entry(root, textvariable=key)
 entry1.grid(row=0, column=1, sticky=W, padx=5, pady=5)
 
-button8 = Button(root, text="Open Key File", command=openfilekunci)
-button8.grid(row=0, column=2, sticky=W, padx=5, pady=5)
-
 label2 = Label(root, text="Plain Text")
 label2.grid(row=1, column=0, sticky=W, padx=5, pady=5)
 entry2 = Entry(root, textvariable=plain)
@@ -202,5 +199,6 @@ button6.grid(row=4, column=0, sticky=W, padx=5, pady=5)
 button7 = Button(root, text="Exit", command=exit)
 button7.grid(row=4, column=1, sticky=W, padx=5, pady=5)
 
-
+button8 = Button(root, text="Open Key File", command=openfilekunci)
+button8.grid(row=0, column=2, sticky=W, padx=5, pady=5)
 root.mainloop()
