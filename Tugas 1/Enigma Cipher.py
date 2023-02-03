@@ -3,40 +3,34 @@ import string
 from tkinter import *
 
 def encrypt():
-    plaintext = input_entry.get()
-    plaintext = plaintext.upper()
+    input_text = input_entry.get()
+    rotors = [3,2,1] 
     alphabet = string.ascii_uppercase
     enigma = {}
     for i in range(len(alphabet)):
-        enigma[alphabet[i]] = alphabet[(i + 3) % 26]
-        enigma[alphabet[i]] = alphabet[(alphabet.index(enigma[alphabet[i]]) + 2) % 26]
-        enigma[alphabet[i]] = alphabet[(alphabet.index(enigma[alphabet[i]]) + 1) % 26]
-    ciphertext = ""
-    for char in plaintext:
-        if char in alphabet:
-            ciphertext += enigma[char]
-        else:
-            ciphertext += char
-    output_label["text"] = ciphertext
+        enigma[alphabet[i]] = alphabet[(i + rotors[0]) % 26]
+        enigma[alphabet[i]] = alphabet[(alphabet.index(enigma[alphabet[i]]) + rotors[1]) % 26]
+        enigma[alphabet[i]] = alphabet[(alphabet.index(enigma[alphabet[i]]) + rotors[2]) % 26]
+
+    result = []
+    for char in input_text:
+        result.append(enigma[char.upper()] if char.upper() in enigma else char)
+    output_label["text"] = "".join(result)
 
 def decrypt():
-    ciphertext = input_entry.get()
-    ciphertext = ciphertext.upper()
+    input_text = input_entry.get()
+    rotors = [3,2,1] 
     alphabet = string.ascii_uppercase
     enigma = {}
     for i in range(len(alphabet)):
-        enigma[alphabet[i]] = alphabet[(i + 3) % 26]
-        enigma[alphabet[i]] = alphabet[(alphabet.index(enigma[alphabet[i]]) + 2) % 26]
-        enigma[alphabet[i]] = alphabet[(alphabet.index(enigma[alphabet[i]]) + 1) % 26]
-    plaintext = ""
-    for char in ciphertext:
-        if char in alphabet:
-            plaintext += alphabet[(alphabet.index(char) - 3) % 26]
-            plaintext += alphabet[(alphabet.index(plaintext[-1]) - 2) % 26]
-            plaintext += alphabet[(alphabet.index(plaintext[-1]) - 1) % 26]
-        else:
-            plaintext += char
-    input.set(plaintext)
+        enigma[alphabet[i]] = alphabet[(i + rotors[0]) % 26]
+        enigma[alphabet[i]] = alphabet[(alphabet.index(enigma[alphabet[i]]) + rotors[1]) % 26]
+        enigma[alphabet[i]] = alphabet[(alphabet.index(enigma[alphabet[i]]) + rotors[2]) % 26]
+
+    result = []
+    for char in input_text:
+        result.append(enigma[char.upper()] if char.upper() in enigma else char)
+    output_label["text"] = "".join(result)
 
 def displayrotors():
     rotors = [3,2,1] 
@@ -62,12 +56,10 @@ root.title("Enigma Cipher")
 root.geometry("1150x400")
 root.resizable(0, 0)
 
-input = StringVar()
-
 input_label = tk.Label(root, text="Plain Text:")
 input_label.grid(row=0, column=0, sticky=W, padx=5, pady=5)
 
-input_entry = tk.Entry(root, textvariable=input)
+input_entry = tk.Entry(root)
 input_entry.grid(row=0, column=1, sticky=W, padx=5, pady=5)
 
 encrypt_button = tk.Button(root, text="Encrypt", command=encrypt)
