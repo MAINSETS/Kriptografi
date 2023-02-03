@@ -41,6 +41,7 @@ def decrypt():
     else:
         messagebox.showerror("Error", "Key and/or plain text is not in this 256 ASCII characters")
 
+
 #untuk membuka file teks dan langsung ada di kotak teks
 def openfiletxt():
     file = filedialog.askopenfile(mode='r', filetypes=[('Text files', 'txt')])
@@ -48,12 +49,12 @@ def openfiletxt():
         content = file.read(10000)
         plain.set(content)
 
-#untuk membuka file nonteks
+# Fungsi untuk membuka file binary
 def openfilebiner():
     file = filedialog.askopenfile(mode='rb', filetypes=[('All files', '*')])
-    if file is not None:
-        content = file.read(10000)
-        plain.set(content)
+    data = file.read()
+    data_str = data.decode('utf-8')
+    plain.set(data_str)
 
 #fitur untuk menyimpan file teks jika sudah dienkripsi/didekripsi
 def savefile():
@@ -64,6 +65,14 @@ def savefile():
         if file is not None:
             file.write(plain.get())
             file.close()
+
+# Fungsi untuk menyimpan file binary
+def savefilebiner():
+    file = filedialog.asksaveasfile(mode='wb', filetypes=[('All files', '*')])
+    text = plain.get()
+    data = text.encode('utf-8')
+    file.write(data)
+    file.close()
 
 #fungsi menampilkan text dalam kelompok 5 huruf
 def fiveletters(text):
@@ -137,8 +146,11 @@ button3.grid(row=4, column=0, sticky=W, padx=5, pady=5)
 button4 = Button(root, text="Open Binary File", command=openfilebiner)
 button4.grid(row=4, column=1, sticky=W, padx=5, pady=5)
 
-button5 = Button(root, text="Save", command=savefile)
+button5 = Button(root, text="Save Text", command=savefile)
 button5.grid(row=4, column=2, sticky=W, padx=5, pady=5)
+
+button8 = Button(root, text="Save Binary", command=savefilebiner)
+button8.grid(row=4, column=3, sticky=W, padx=5, pady=5)
 
 button6 = Button(root, text="Clear", command=clear)
 button6.grid(row=5, column=0, sticky=W, padx=5, pady=5)
