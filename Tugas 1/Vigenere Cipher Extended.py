@@ -149,14 +149,14 @@ button4.grid(row=4, column=1, sticky=W, padx=5, pady=5)
 button5 = Button(root, text="Save Text", command=savefile)
 button5.grid(row=4, column=2, sticky=W, padx=5, pady=5)
 
-button8 = Button(root, text="Save Binary", command=savefilebiner)
-button8.grid(row=4, column=3, sticky=W, padx=5, pady=5)
-
 button6 = Button(root, text="Clear", command=clear)
 button6.grid(row=5, column=0, sticky=W, padx=5, pady=5)
 
 button7 = Button(root, text="Exit", command=exit)
 button7.grid(row=5, column=1, sticky=W, padx=5, pady=5)
+
+button8 = Button(root, text="Save Binary", command=savefilebiner)
+button8.grid(row=4, column=3, sticky=W, padx=5, pady=5)
 
 
 root.mainloop()
