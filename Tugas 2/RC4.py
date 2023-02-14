@@ -120,7 +120,7 @@ def exit():
 
 #membuat GUI dari frame, label, dan tombol
 root = Tk()
-root.title("Vigenere Cipher Extended")
+root.title("RC 4")
 root.geometry("600x400")
 root.resizable(0, 0)
 
