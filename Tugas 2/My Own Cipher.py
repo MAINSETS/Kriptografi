@@ -71,7 +71,7 @@ def ksa(key):
     s = list(range(256))
     j = 0
     for i in range(256):
-        j = (j + s[i] + key[i % keylength]) % 256
+        j = (j + s[i] + key[i % keylength]) % 256 
         #swap s[i] dan s[j]
         s[i], s[j] = s[j], s[i]
     return s
@@ -85,11 +85,9 @@ def prga(s, text):
         i = (i + 1) % 256
         j = (j + s[i]) % 256
         s[i], s[j] = s[j], s[i]
-        keystream.append(s[(s[i] + s[j]) % 256])
-        #keystream dimodif disini.....
-        
+        #modifikasi rumus dari RC 4 menjadi stream cipher baru
+        keystream.append(s[(s[i] + s[j]) % 256] ^ ord(key.get()[k % len(key.get())]))
     return keystream
-
 
 #untuk membuka file teks dan langsung ada di kotak teks
 def openfiletxt():
@@ -169,10 +167,10 @@ label2.grid(row=1, column=0, sticky=W, padx=5, pady=5)
 entry2 = Entry(root, textvariable=plain)
 entry2.grid(row=1, column=1, sticky=W, padx=5, pady=5)
 
-label4 = Label(root, text="Cipher Text string")
-label4.grid(row=2, column=0, sticky=W, padx=5, pady=5)
-entry4 = Entry(root, textvariable=cipher)
-entry4.grid(row=2, column=1, sticky=W, padx=5, pady=5)
+label3 = Label(root, text="Cipher Text string")
+label3.grid(row=2, column=0, sticky=W, padx=5, pady=5)
+entry3 = Entry(root, textvariable=cipher)
+entry3.grid(row=2, column=1, sticky=W, padx=5, pady=5)
 
 label4 = Label(root, text="Cipher Text base64")
 label4.grid(row=3, column=0, sticky=W, padx=5, pady=5)
@@ -191,14 +189,14 @@ button3.grid(row=5, column=0, sticky=W, padx=5, pady=5)
 button4 = Button(root, text="Open Binary File", command=openfilebiner)
 button4.grid(row=5, column=1, sticky=W, padx=5, pady=5)
 
-button6 = Button(root, text="Clear", command=clear)
-button6.grid(row=6, column=0, sticky=W, padx=5, pady=5)
+button5 = Button(root, text="Clear", command=clear)
+button5.grid(row=6, column=0, sticky=W, padx=5, pady=5)
 
-button7 = Button(root, text="Exit", command=exit)
-button7.grid(row=6, column=1, sticky=W, padx=5, pady=5)
+button6 = Button(root, text="Exit", command=exit)
+button6.grid(row=6, column=1, sticky=W, padx=5, pady=5)
 
-button8 = Button(root, text="Save Cipher", command=savefilebiner)
-button8.grid(row=5, column=2, sticky=W, padx=5, pady=5)
+button7 = Button(root, text="Save Cipher", command=savefilebiner)
+button7.grid(row=5, column=2, sticky=W, padx=5, pady=5)
 
 
 root.mainloop()
