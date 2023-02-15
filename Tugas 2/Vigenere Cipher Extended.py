@@ -102,6 +102,7 @@ root = Tk()
 root.title("Vigenere Cipher Extended")
 root.geometry("600x400")
 root.resizable(0, 0)
+root.configure(bg = "#FBE6BF")
 
 key = StringVar()
 plain = StringVar()
@@ -109,53 +110,53 @@ cipher = StringVar()
 cipherfive = StringVar()
 plainfive = StringVar()
 
-label1 = Label(root, text="Key")
+label1 = Label(root, text="Key", bg = "#FBE6BF")
 label1.grid(row=0, column=0, sticky=W, padx=5, pady=5)
 entry1 = Entry(root, textvariable=key)
 entry1.grid(row=0, column=1, sticky=W, padx=5, pady=5)
 
-label2 = Label(root, text="Plain Text")
+label2 = Label(root, text="Plain Text", bg = "#FBE6BF")
 label2.grid(row=1, column=0, sticky=W, padx=5, pady=5)
 entry2 = Entry(root, textvariable=plain)
 entry2.grid(row=1, column=1, sticky=W, padx=5, pady=5)
 
-label3 = Label(root, text="Plain Text 5 Letters Group")
+label3 = Label(root, text="Plain Text 5 Letters Group", bg = "#FBE6BF")
 label3.grid(row=1, column=2, sticky=W, padx=5, pady=5)
 entry3 = Entry(root, textvariable=plainfive, state=DISABLED)
 entry3.grid(row=1, column=3, sticky=W, padx=5, pady=5)
 
-label4 = Label(root, text="Cipher Text")
+label4 = Label(root, text="Cipher Text", bg = "#FBE6BF")
 label4.grid(row=2, column=0, sticky=W, padx=5, pady=5)
 entry4 = Entry(root, textvariable=cipher)
 entry4.grid(row=2, column=1, sticky=W, padx=5, pady=5)
 
-label5 = Label(root, text="Cipher Text 5 Letters Group")
+label5 = Label(root, text="Cipher Text 5 Letters Group", bg = "#FBE6BF")
 label5.grid(row=2, column=2, sticky=W, padx=5, pady=5)
 entry5 = Entry(root, textvariable=cipherfive, state=DISABLED)
 entry5.grid(row=2, column=3, sticky=W, padx=5, pady=5)
 
-button1 = Button(root, text="Encrypt", command=encrypt)
+button1 = Button(root, text="Encrypt", command=encrypt, bg = "#FBB43C")
 button1.grid(row=3, column=0, sticky=W, padx=5, pady=5)
 
-button2 = Button(root, text="Decrypt", command=decrypt)
+button2 = Button(root, text="Decrypt", command=decrypt, bg = "#FBB43C")
 button2.grid(row=3, column=1, sticky=W, padx=5, pady=5)
 
-button3 = Button(root, text="Open Text File", command=openfiletxt)
+button3 = Button(root, text="Open Text File", command=openfiletxt, bg = "#FBB43C")
 button3.grid(row=4, column=0, sticky=W, padx=5, pady=5)
 
-button4 = Button(root, text="Open Binary File", command=openfilebiner)
+button4 = Button(root, text="Open Binary File", command=openfilebiner, bg = "#FBB43C")
 button4.grid(row=4, column=1, sticky=W, padx=5, pady=5)
 
-button5 = Button(root, text="Save Text", command=savefile)
+button5 = Button(root, text="Save Text", command=savefile, bg = "#FBB43C")
 button5.grid(row=4, column=2, sticky=W, padx=5, pady=5)
 
-button6 = Button(root, text="Clear", command=clear)
+button6 = Button(root, text="Clear", command=clear, bg = "#FBB43C")
 button6.grid(row=5, column=0, sticky=W, padx=5, pady=5)
 
-button7 = Button(root, text="Exit", command=exit)
+button7 = Button(root, text="Exit", command=exit, bg = "#FBB43C")
 button7.grid(row=5, column=1, sticky=W, padx=5, pady=5)
 
-button8 = Button(root, text="Save Binary", command=savefilebiner)
+button8 = Button(root, text="Save Binary", command=savefilebiner, bg = "#FBB43C")
 button8.grid(row=4, column=3, sticky=W, padx=5, pady=5)
 
 
