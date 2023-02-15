@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import filedialog
 from tkinter import messagebox
+import base64
 
 #fungsi untuk mengenkripsi
 def encrypt():
@@ -27,7 +28,14 @@ def encrypt():
             ciphertext = ciphertext + chr(i)
         cipher.set(ciphertext)
         cipherfive.set(fiveletters(ciphertext))
-    
+        
+        #convert string to byte
+        ciphers = cipher.get()
+        res = ciphers.encode('utf-8')
+        
+        #convert byte to base64   
+        encoded = base64.b64encode(res)
+        cipher64.set(encoded)
 
 #fungsi untuk mendekripsi
 def decrypt():
@@ -108,7 +116,7 @@ def savefile():
 def savefilebiner():
     file = filedialog.asksaveasfile(mode='wb', filetypes=[('All files', '*')])
     text = cipher.get()
-    data = text.encode('latin-1')
+    data = text.encode('utf-8')
     file.write(data)
     file.close()
 
@@ -146,6 +154,7 @@ plain = StringVar()
 cipher = StringVar()
 cipherfive = StringVar()
 plainfive = StringVar()
+cipher64 = StringVar()
 
 label1 = Label(root, text="Key")
 label1.grid(row=0, column=0, sticky=W, padx=5, pady=5)
@@ -172,29 +181,31 @@ label5.grid(row=2, column=2, sticky=W, padx=5, pady=5)
 entry5 = Entry(root, textvariable=cipherfive, state=DISABLED)
 entry5.grid(row=2, column=3, sticky=W, padx=5, pady=5)
 
+label4 = Label(root, text="Cipher Text base64")
+label4.grid(row=3, column=0, sticky=W, padx=5, pady=5)
+entry4 = Entry(root, textvariable=cipher64, state=DISABLED)
+entry4.grid(row=3, column=1, sticky=W, padx=5, pady=5)
+
 button1 = Button(root, text="Encrypt", command=encrypt)
-button1.grid(row=3, column=0, sticky=W, padx=5, pady=5)
+button1.grid(row=4, column=0, sticky=W, padx=5, pady=5)
 
 button2 = Button(root, text="Decrypt", command=decrypt)
-button2.grid(row=3, column=1, sticky=W, padx=5, pady=5)
+button2.grid(row=4, column=1, sticky=W, padx=5, pady=5)
 
 button3 = Button(root, text="Open Text File", command=openfiletxt)
-button3.grid(row=4, column=0, sticky=W, padx=5, pady=5)
+button3.grid(row=5, column=0, sticky=W, padx=5, pady=5)
 
 button4 = Button(root, text="Open Binary File", command=openfilebiner)
-button4.grid(row=4, column=1, sticky=W, padx=5, pady=5)
-
-button5 = Button(root, text="Save Text", command=savefile)
-button5.grid(row=4, column=2, sticky=W, padx=5, pady=5)
+button4.grid(row=5, column=1, sticky=W, padx=5, pady=5)
 
 button6 = Button(root, text="Clear", command=clear)
-button6.grid(row=5, column=0, sticky=W, padx=5, pady=5)
+button6.grid(row=6, column=0, sticky=W, padx=5, pady=5)
 
 button7 = Button(root, text="Exit", command=exit)
-button7.grid(row=5, column=1, sticky=W, padx=5, pady=5)
+button7.grid(row=6, column=1, sticky=W, padx=5, pady=5)
 
-button8 = Button(root, text="Save Binary", command=savefilebiner)
-button8.grid(row=4, column=3, sticky=W, padx=5, pady=5)
+button8 = Button(root, text="Save Cipher", command=savefilebiner)
+button8.grid(row=5, column=2, sticky=W, padx=5, pady=5)
 
 
 root.mainloop()
