@@ -7,55 +7,72 @@ def encrypt():
     if len(key.get()) == 0 or len(plain.get()) == 0:
         messagebox.showerror("Error", "Key or Plain text is empty")
     else:
+        #melakukan ksa pada key
         keylist = []
         for i in key.get():
             keylist.append(ord(i))
         s = ksa(keylist)
+        
+        #melakukan prga pada hasil s dengan plaintext
         keystream = prga(s, len(plain.get()))
+        
+        #enkripsi melakukan XOR antara keystream dengan plaintext
         cipherlist = []
-        for i in range(len(plain.get())):
+        for i in range(len(plain.get())): # plain[i] ^ keystream[i]
             cipherlist.append(ord(plain.get()[i]) ^ keystream[i])
+        
+        #menuliskan chipertext ke layar
         ciphertext = ""
         for i in cipherlist:
             ciphertext = ciphertext + chr(i)
         cipher.set(ciphertext)
         cipherfive.set(fiveletters(ciphertext))
+    
 
 #fungsi untuk mendekripsi
 def decrypt():
     if len(key.get()) == 0 or len(cipher.get()) == 0:
         messagebox.showerror("Error", "Key or Cipher text is empty")
     else:
+        #melakukan ksa pada key
         keylist = []
         for i in key.get():
             keylist.append(ord(i))
         s = ksa(keylist)
+        
+        #melakukan prga pada hasil s dengan ciphertext
         keystream = prga(s, len(cipher.get()))
+        
+        #dekipsi melakukan XOR antara keystream dengan ciphertext
         plainlist = []
-        for i in range(len(cipher.get())):
+        for i in range(len(cipher.get())): # cipher[i] ^ keystream[i]
             plainlist.append(ord(cipher.get()[i]) ^ keystream[i])
+            
+        #menuliskan plaintext ke layar
         plaintext = ""
         for i in plainlist:
             plaintext = plaintext + chr(i)
         plain.set(plaintext)
         plainfive.set(fiveletters(plaintext))
 
-#fungsi untuk mengacak key
+#fungsi ksa untuk mengacak larik s dari key
 def ksa(key):
     keylength = len(key)
+    # s = [0,1,2,...,254,255]
     s = list(range(256))
     j = 0
     for i in range(256):
         j = (j + s[i] + key[i % keylength]) % 256
+        #swap s[i] dan s[j]
         s[i], s[j] = s[j], s[i]
     return s
 
-#fungsi untuk mengacak plaintext
-def prga(s, n):
+#fungsi prga untuk membangkitkan keystream
+def prga(s, text):
     i = 0
     j = 0
     keystream = []
-    for k in range(n):
+    for k in range(text):
         i = (i + 1) % 256
         j = (j + s[i]) % 256
         s[i], s[j] = s[j], s[i]
@@ -84,13 +101,13 @@ def savefile():
     else:
         file = filedialog.asksaveasfile(mode='w', filetypes=[('Text files', 'txt')])
         if file is not None:
-            file.write(plain.get())
+            file.write(cipher.get())
             file.close()
 
 # Fungsi untuk menyimpan file binary
 def savefilebiner():
     file = filedialog.asksaveasfile(mode='wb', filetypes=[('All files', '*')])
-    text = plain.get()
+    text = cipher.get()
     data = text.encode('latin-1')
     file.write(data)
     file.close()
