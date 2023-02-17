@@ -1,39 +1,19 @@
 <a name="readme-top"></a>
-<h1 align="center">MyFood</h1>
+<h1 align="center">My Own Cipher</h1>
 <!-- TABLE OF CONTENTS -->
 Daftar Isi
   <ol>
     <li><a href="#penjelasan-aplikasi">Penjelasan Aplikasi</a></li>
     <li><a href="#cara-menjalankan-aplikasi">Cara Menjalankan Aplikasi</a></li>
-    <li>
-      <a href="#daftar-modul">Daftar Modul</a>
-      <ul>
-        <li><a href="#modul-menu">Modul Menu</a></li>
-      </ul>
-      <ul>
-        <li><a href="#modul-produk">Modul Produk</a></li>
-      </ul>
-      <ul>
-        <li><a href="#modul-keranjang">Modul Keranjang</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#daftar-tabel-basis-data">Daftar Tabel Basis Data</a>
-      <ul>
-        <li><a href="#tabel-data-menu-restoran">Tabel Data Menu Restoran</a></li>
-      </ul>
-      <ul>
-        <li><a href="#tabel-data-pesanan-customer">Tabel Data Pesanan Customer</a></li>
-      </ul>
-    </li>
   </ol>
 
 <!-- Penjelasan Aplikasi -->
 ## Penjelasan Aplikasi
 
-**MyFood**
+**My Own Cipher**
 
-MyFood merupakan aplikasi pemesanan makanan di restoran yang bertujuan untuk membantu customer yang hendak melakukan pemesanan makanan melalui dekstop app yang tersedia pada restoran. Dengan adanya aplikasi ini, customer akan dimudahkan dalam melihat daftar menu, harga, dan dapat memesan makanan dan minuman sendiri melalui fitur keranjang dan checkout. Makanan yang telah dipesan customer otomatis masuk ke database milik restoran sehingga mempermudah koki dalam menyiapkan menu makanan.
+MyOwnStreamCipher adalah program stream cipher dapat memodifikasi RC4 (modified RC4) dan menggabungkannya dengan konsep Extended Vigenere Cipher. 
+Memodifikasi RC4 dan menggabungkannya dengan Extended Vigenere Cipher/Play Cipher berarti memodifikasi prosedur PRGA di dalam RC4 dan mengabungkannya dengan konsep Extended Vgenere Cipher
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -41,18 +21,10 @@ MyFood merupakan aplikasi pemesanan makanan di restoran yang bertujuan untuk mem
 ## Cara Menjalankan Aplikasi
 
 **Prerequisites**
-1. Mengunduh file [DataRestoran.sql](https://github.com/salimashockbgt/TubesRPL/tree/master/src/db) yang tersedia pada folder src/db
-2. Membuat database yang bernama DataRestoran pada postgreSQL, lalu mengimport file DataRestoran.sql pada database DataRestoran
-3. Mengubah pengaturan server postgreSQL menjadi sebagai berikut:
-          
-          user="postgres",
-          password="123",
-          host="127.0.0.1",
-          port=5432
-4. Membuka folder src pada master branch lalu run program melalui file Main.py
-
-Saat akan menjalankan program, lakukan instalasi pycoporg2 pada terminal.
+1. Download folder tugas 2 dan jalankan pada IDE visual studio code atau IDE lainnya yang mendukung
+2. Saat akan menjalankan program, apabila belum memiliki library tkinter, lakukan instalasi tkinter pada terminal.
   ```sh
-  pip install psycopg2-binary
+  pip install tkinter
   ```
+3. Run program My Own Cipher.py
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
