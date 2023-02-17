@@ -28,7 +28,6 @@ def encrypt():
         for i in cipherlist:
             ciphertext = ciphertext + chr(i)
         cipher.set(ciphertext)
-        cipherfive.set(fiveletters(ciphertext))
         
         #convert string to byte
         ciphers = cipher.get()
@@ -62,7 +61,6 @@ def decrypt():
         for i in plainlist:
             plaintext = plaintext + chr(i)
         plain.set(plaintext)
-        plainfive.set(fiveletters(plaintext))
 
 #fungsi ksa untuk mengacak larik s dari key
 def ksa(key):
@@ -117,7 +115,21 @@ def savefile():
 def savefilebiner():
     file = filedialog.asksaveasfile(mode='wb', filetypes=[('All files', '*')])
     text = cipher.get()
+    data = text.encode('latin-1')
+    file.write(data)
+    file.close()
+    
+def savefiletext():
+    file = filedialog.asksaveasfile(mode='wb', filetypes=[('All files', '*')])
+    text = cipher.get()
     data = text.encode('utf-8')
+    file.write(data)
+    file.close()
+
+def saveplainbiner():
+    file = filedialog.asksaveasfile(mode='wb', filetypes=[('All files', '*')])
+    text = plain.get()
+    data = text.encode('latin-1')
     file.write(data)
     file.close()
 
@@ -185,7 +197,12 @@ button6 = Button(root, text="Exit", bg= '#FBB43C', command=exit)
 button6.grid(row=6, column=1, sticky=W, padx=5, pady=5)
 
 button7 = Button(root, text="Save Cipher", bg= '#FBB43C', command=savefilebiner)
-button7.grid(row=5, column=2, sticky=W, padx=5, pady=5)
+button7.grid(row=6, column=3, sticky=W, padx=5, pady=5)
 
+button8 = Button(root, text="Save Plaintext Biner", bg= '#FBB43C', command=saveplainbiner)
+button8.grid(row=5, column=2, sticky=W, padx=5, pady=5)
+
+button9 = Button(root, text="Save Plaintext Txt", bg= '#FBB43C', command=savefiletext)
+button9.grid(row=6, column=2, sticky=W, padx=5, pady=5)
 
 root.mainloop()
