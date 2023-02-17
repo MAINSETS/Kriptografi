@@ -12,8 +12,7 @@ Daftar Isi
 
 **My Own Cipher**
 
-MyOwnStreamCipher adalah program stream cipher dapat memodifikasi RC4 (modified RC4) dan menggabungkannya dengan konsep Extended Vigenere Cipher. 
-Memodifikasi RC4 dan menggabungkannya dengan Extended Vigenere Cipher/Play Cipher berarti memodifikasi prosedur PRGA di dalam RC4 dan mengabungkannya dengan konsep Extended Vgenere Cipher
+My Own Cipher adalah program stream cipher yang memodifikasi RC4 (modified RC4) dan menggabungkannya dengan konsep Extended Vigenere Cipher. Pada program kami, dilakukan modifikasi pada prosedur PRGA di dalam RC4 dan menggabungkannya dengan konsep Extended Vigenere Cipher. Pada prosedur PRGA, kami melakukan penambahan rumus permutasi dengan XOR key dengan konsep Extended Vigenere Cipher. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
