@@ -121,24 +121,12 @@ def savefilebiner():
     file.write(data)
     file.close()
 
-#fungsi menampilkan text dalam kelompok 5 huruf
-def fiveletters(text):
-    newtext = ""
-    count = 0
-    for i in text:
-        if count%5 == 0:
-            newtext = newtext + " "
-        newtext = newtext + i
-        count = count + 1
-    return newtext
-
 #menghapus semua kotak
 def clear():
     key.set("")
     plain.set("")
     cipher.set("")
-    plainfive.set("")
-    cipherfive.set("")
+    cipher64.set("")
 
 #keluar dari program
 def exit():
