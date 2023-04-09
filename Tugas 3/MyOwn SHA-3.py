@@ -1,7 +1,4 @@
-#buatlah SHA-3 tanpa menggunakan library
-
 # Import libraries
-import math
 import binascii
 
 # Define SHA-3 constants
@@ -116,3 +113,8 @@ def main():
     
 #test
 main()
+
+
+
+
+
