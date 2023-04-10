@@ -10,7 +10,7 @@ def sha3_512(data):
     hash_object.update(data)
     return hash_object.hexdigest()
 
-data = b'Hello, world!'
+data = b'halo'
 sha3_256_hash = sha3_256(data)
 sha3_512_hash = sha3_512(data)
 

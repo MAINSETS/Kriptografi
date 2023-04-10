@@ -33,6 +33,15 @@ def decrypt(private_key, ciphertext):
     plain = pow(ciphertext, key, n)
     return plain
 
+def write():
+    public_file = open('public.pub', 'w')
+    public_file.write(str(public_key[0])) #+ '\n' + str(public_key[1]))
+    public_file.close()
+
+    private_file = open('private.pri', 'w')
+    private_file.write(str(private_key[0])) #+ '\n' + str(private_key[1]))
+    private_file.close()
+
 #testing
 if __name__ == '__main__':
     print("Prime number for p: ", generate_prime_number()) #untuk nilai p
@@ -41,6 +50,7 @@ if __name__ == '__main__':
     q = int(input("Enter another prime number (q): "))
 
     public_key, private_key = generate_key_pair(p, q)
+    write()
 
     print("Public key: ", public_key)
     print("Private key: ", private_key)
