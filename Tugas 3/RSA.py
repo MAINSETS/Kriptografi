@@ -35,11 +35,11 @@ def decrypt(private_key, ciphertext):
 
 def write():
     public_file = open('public.pub', 'w')
-    public_file.write(str(public_key[0])) #+ '\n' + str(public_key[1]))
+    public_file.write(str(public_key[0])) + '\n' + str(public_key[1])
     public_file.close()
 
     private_file = open('private.pri', 'w')
-    private_file.write(str(private_key[0])) #+ '\n' + str(private_key[1]))
+    private_file.write(str(private_key[0])) + '\n' + str(private_key[1])
     private_file.close()
 
 #testing

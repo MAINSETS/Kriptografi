@@ -47,7 +47,7 @@ class Main(tk.Tk):
 
         #button
         button_image_1 = PhotoImage(
-            file = "Tugas 3/img/Key.png")
+            file = "img/Key.png")
         button_1 = Button(
             image=button_image_1,
             borderwidth=0,
@@ -63,7 +63,7 @@ class Main(tk.Tk):
             height=55
         )
         button_image_2 = PhotoImage(
-            file = "Tugas 3/img/Sign.png")
+            file = "img/Sign.png")
         button_2 = Button(
             image=button_image_2,
             borderwidth=0,
@@ -79,7 +79,7 @@ class Main(tk.Tk):
             height=55
         )
         button_image_3 = PhotoImage(
-            file = "Tugas 3/img/Verify.png")
+            file = "img/Verify.png")
         button_3 = Button(
             image=button_image_3,
             borderwidth=0,
@@ -95,7 +95,7 @@ class Main(tk.Tk):
             height=55
         )
         button_image_4 = PhotoImage(
-            file = "Tugas 3/img/Exit.png")
+            file = "img/Exit.png")
         button_4 = Button(
             image=button_image_4,
             borderwidth=0,
