@@ -23,6 +23,15 @@ def generate_key_pair(p, q):
     d = inverse(e, m)
     return (e, n), (d, n)
 
+def getpublickey():
+    public_key = generate_key_pair(generate_prime_number(), generate_prime_number())
+    return public_key[0]
+
+def getprivatekey():
+    private_key = generate_key_pair(generate_prime_number(), generate_prime_number())
+    return private_key[0]
+
+
 def encrypt(public_key, plaintext):
     key, n = public_key
     cipher = pow(plaintext, key, n)
@@ -33,6 +42,7 @@ def decrypt(private_key, ciphertext):
     plain = pow(ciphertext, key, n)
     return plain
 
+
 def write():
     public_file = open('public.pub', 'w')
     public_file.write(str(public_key[0])) + '\n' + str(public_key[1])
@@ -41,6 +51,7 @@ def write():
     private_file = open('private.pri', 'w')
     private_file.write(str(private_key[0])) + '\n' + str(private_key[1])
     private_file.close()
+
 
 #testing
 if __name__ == '__main__':

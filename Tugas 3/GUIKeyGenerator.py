@@ -19,13 +19,25 @@ class GUIKeyGenerator(tk.Tk):
         GUIKey()
 
         def GUIgetkeypair():   
-            button = Button(roo, text="Buat kunci", font=("Arial", 10, "bold"), bg = "#FBE6BF")
+            public_key = IntVar()
+            private_key = IntVar()
+
+            button = Button(roo, text="Buat kunci", font=("Arial", 10, "bold"), bg = "#FBE6BF", command = lambda: [public_key.set(getpublickey()), private_key.set(getprivatekey())])
             button.place(x=200, y=200)
-            button.bind("<Button-1>", generate_prime_number())
+
+            button = Button(roo, text="Simpan", font=("Arial", 10, "bold"), bg = "#FBE6BF", command = lambda: [write()])
+            button.place(x=200, y=250)
             
             text = Label(roo, text="Kunci publik: ", font=("Arial", 10, "bold"), bg = "#FBE6BF")
             text.place(x=40, y=300)
+
+            entry = Entry(roo, textvariable=public_key, font=("Arial", 10, "bold"), bg = "#FBE6BF")
+            entry.place(x=150, y=300)
+
             text = Label(roo, text="Kunci privat: ", font=("Arial", 10, "bold"), bg = "#FBE6BF")
             text.place(x=40, y=350)
 
+            entry = Entry(roo, textvariable=private_key, font=("Arial", 10, "bold"), bg = "#FBE6BF")
+            entry.place(x=150, y=350)
         GUIgetkeypair()
+
