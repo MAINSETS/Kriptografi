@@ -23,7 +23,6 @@ def generate_key_pair(p, q):
     d = inverse(e, m)
     return (e, n), (d, n)
 
-
 def encrypt(public_key, plaintext):
     key, n = public_key
     cipher = pow(plaintext, key, n)

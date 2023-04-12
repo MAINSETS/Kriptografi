@@ -8,8 +8,7 @@ from RSA import *
 class GUIKeyGenerator(tk.Tk):
     def __init__(roo):
         super().__init__()     
-        def GUIgetkeypair():   
-            
+        def GUIgetkeypair():        
             def getkey():
                 content_q = entry_q.get()
                 content_p = entry_p.get()
@@ -20,11 +19,11 @@ class GUIKeyGenerator(tk.Tk):
                     
                 entry_pub.delete(0, len(entry_pub.get()))
                 entry_pub.insert(0, a[0][0])
-                pub.set(a[0][0])
+                pub.set(a[0])
 
                 entry_pri.delete(0, len(entry_pri.get()))
                 entry_pri.insert(0, a[1][0])
-                pri.set(a[1][0])
+                pri.set(a[1])
             
             def write():
                 with open('public_key.pub', 'w') as f:
@@ -44,7 +43,7 @@ class GUIKeyGenerator(tk.Tk):
                 entry_p.insert(0, p)
                 entry_q.delete(0, len(entry_q.get()))
                 entry_q.insert(0, q)  
-
+        
             roo.geometry("600x400")
             roo.title("Key Generator")
             roo.resizable(0, 0)
