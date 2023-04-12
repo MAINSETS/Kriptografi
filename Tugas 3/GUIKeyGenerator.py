@@ -43,9 +43,7 @@ class GUIKeyGenerator(tk.Tk):
                 entry_p.delete(0, len(entry_p.get()))
                 entry_p.insert(0, p)
                 entry_q.delete(0, len(entry_q.get()))
-                entry_q.insert(0, q)
-                
-                
+                entry_q.insert(0, q)  
 
             roo.geometry("600x400")
             roo.title("Key Generator")
@@ -58,28 +56,28 @@ class GUIKeyGenerator(tk.Tk):
             text = Label(roo, text="Nilai p", font=("Arial", 10, "bold"), bg = "#FBE6BF")
             text.place(x=50, y=110)
 
-            entry_p = Entry(roo, font=("Arial", 10, "bold"), bg = "#FBE6BF")
+            entry_p = Entry(roo, font=("Arial", 10, "bold"), bg = "#FFFFFF")
             entry_p.place(x=150, y=110)
 
             # Bagian q
             text = Label(roo, text="Nilai q", font=("Arial", 10, "bold"), bg = "#FBE6BF")
             text.place(x=50, y=160)
 
-            entry_q = Entry(roo, font=("Arial", 10, "bold"), bg = "#FBE6BF")
+            entry_q = Entry(roo, font=("Arial", 10, "bold"), bg = "#FFFFFF")
             entry_q.place(x=150, y=160, height=20)
             
             # Bagian kunci publik
             text = Label(roo, text="Kunci publik", font=("Arial", 10, "bold"), bg = "#FBE6BF")
             text.place(x=50, y=210)
 
-            entry_pub = Entry(roo, textvariable=pub, font=("Arial", 10, "bold"), bg = "#FBE6BF")
+            entry_pub = Entry(roo, textvariable=pub, font=("Arial", 10, "bold"), bg = "#FFFFFF")
             entry_pub.place(x=150, y=210)
 
             # Bagian kunci privat
             text = Label(roo, text="Kunci privat", font=("Arial", 10, "bold"), bg = "#FBE6BF")
             text.place(x=50, y=260)
 
-            entry_pri = Entry(roo, textvariable=pri, font=("Arial", 10, "bold"), bg = "#FBE6BF")
+            entry_pri = Entry(roo, textvariable=pri, font=("Arial", 10, "bold"), bg = "#FFFFFF")
             entry_pri.place(x=150, y=260, height=20)
 
             # Buttons
