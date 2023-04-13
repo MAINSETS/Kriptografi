@@ -33,6 +33,11 @@ def decrypt(private_key, ciphertext):
     plain = pow(ciphertext, key, n)
     return plain
 
+def encypttext(public_key, plaintext):
+    key, n = public_key
+    cipher = pow(plaintext, key, n)
+    return cipher
+
 
 #testing
 if __name__ == '__main__':
@@ -50,7 +55,7 @@ if __name__ == '__main__':
     print("e: ", public_key[0])
     print("d: ", private_key[0])
 
-    message = int(input("Enter a number to encrypt: "))
+    message = (input("Enter a number to encrypt: "))
     ciphertext = encrypt(public_key, message)
     print("Encrypted message: ", ciphertext)
 

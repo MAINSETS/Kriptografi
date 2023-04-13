@@ -49,11 +49,11 @@ class GUISigning(tk.Tk):
             def sign():
                 stringkey = str(key.get())
                 real_key = stringtokey(stringkey)
-
                 b = encrypt(real_key, int(hasil.get(), base=16))
+                c = hex(b)
                 entry_sign.delete(0, len(entry_sign.get()))
-                entry_sign.insert(0, b)
-                signage.set(b)
+                entry_sign.insert(0, c)
+                signage.set(c)
 
             def save():
                 with open('signature.txt', 'w') as f:
@@ -118,7 +118,10 @@ class GUISigning(tk.Tk):
             button_sign = Button(roo, text="Sign", command=sign)
             button_sign.place(x=500, y=170)
 
-            button_save = Button(roo, text="Save", command=save)
+            button_save = Button(roo, text="Save binary", command=save)
             button_save.place(x=500, y=200)
+
+            button_save = Button(roo, text="Save txt", command=signtextfile)
+            button_save.place(x=500, y=230)
 
         GUISign()
