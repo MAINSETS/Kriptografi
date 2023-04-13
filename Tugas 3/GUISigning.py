@@ -6,6 +6,7 @@ from tkinter import filedialog
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 from RSA import *
 from SHA_3 import *
+from utility import *
 
 #membuat GUI dari frame, label, dan tombol
 class GUISigning(tk.Tk):
@@ -46,7 +47,10 @@ class GUISigning(tk.Tk):
                 hasil.set(b)
 
             def sign():
-                b = encrypt((key.get()[0], key.get()[1]), hasil.get())
+                stringkey = str(key.get())
+                real_key = stringtokey(stringkey)
+
+                b = encrypt(real_key, int(hasil.get(), base=16))
                 entry_sign.delete(0, len(entry_sign.get()))
                 entry_sign.insert(0, b)
                 signage.set(b)
@@ -65,7 +69,7 @@ class GUISigning(tk.Tk):
             text.place(x=40, y=10)
 
             file = StringVar()
-            key = DoubleVar()
+            key = StringVar()
             hasil = StringVar()
             signage = DoubleVar()
 

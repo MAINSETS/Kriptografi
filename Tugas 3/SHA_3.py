@@ -14,5 +14,5 @@ data = b'halo'
 sha3_256_hash = sha3_256(data)
 sha3_512_hash = sha3_512(data)
 
-print(f"SHA3-256 hash: {sha3_256_hash}")
-print(f"SHA3-512 hash: {sha3_512_hash}")
+# print(f"SHA3-256 hash: {sha3_256_hash}")
+# print(f"SHA3-512 hash: {sha3_512_hash}")

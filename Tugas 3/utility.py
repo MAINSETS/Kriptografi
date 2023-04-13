@@ -52,21 +52,32 @@ def openfile():
             f.close()
     return content, ext
 
-def signedtextfile(content:str, sign:any):
+def stringtokey(stringkey:str):
     '''
-    Minta user simpan textfile yang di-sign hasil nanti diakhir text ada ds nya.
+    Mengembalikan nilai key dari key yg dalam bentuk string
+    '''
+    key_temp = (stringkey.replace(')', '')).split('(')[1]
+    k = key_temp.split(', ')[0]
+    n = key_temp.split(', ')[1].replace("'", '')
+    key = int(k), int(n)
+    return key
+
+
+def combineSignTextFile(content:str, sign:int):
+    '''
+    Gabungin sign dengan text file. hasilnya signed_content
     content: isi file text sebelum
     sign: digital sign
     '''
     # misal user milih satuin sama file
-    f = asksaveasfile(mode='w', title="Save Signed Text File", defaultextension=".txt", initialfile="signed file", filetypes=[('Text Document', '.txt')])
-    f.write(content+'\n<ds>'+sign+'</ds>')
-    f.close()
+    signed_content = (content+'\n<ds>'+sign+'</ds>')
+    return signed_content
+
 # batas GUI
 
 def signtextfile(content:str, private_key:any):
     '''
-    sign document, return hasil encrypt
+    sign document, return hasil encrypt intinya ngehasilin tanda tangan (sign)
     '''
     content_bytes = bytes(content, 'utf-8')
     hashed_content = hash(content_bytes)
@@ -116,10 +127,12 @@ def verifyTextFilePisah(content:str, public_key:any, sign:int):
 
 
 # testing
-content, ext = openfile()
-verifyTextFileSatu(content, 212)
+# stringkey = "b'(220525016522512899534303142402444634969433552519953782316353260664805707605989315073467723341719458240971972670444416460015153041802056018187161130372785305619243274698367607981844763921779553585327, 398784856734535765217641674503699300867202481703020739247738214066550637987314530624634542560596318430743255100500698638884215606885310909068905957843308863996001114056202522143625006787236776812001)'"
+# key = stringtokey(stringkey=stringkey)
+# print(key[0])
+# content, ext = openfile()
+# verifyTextFileSatu(content, 212)
 # signedtextfile(content, "121",True)
-
 
 # content = "openfdile()"
 # content_bytes = bytes(content, 'utf-8')
