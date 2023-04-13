@@ -124,4 +124,7 @@ class GUISigning(tk.Tk):
             button_save = Button(roo, text="Save txt", command=signtextfile)
             button_save.place(x=500, y=230)
 
+            button_exit = Button(roo, text="Keluar", command=roo.destroy())
+            button_exit.place(x=500, y=230)
+
         GUISign()
