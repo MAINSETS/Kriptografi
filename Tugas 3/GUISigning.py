@@ -54,11 +54,6 @@ class GUISigning(tk.Tk):
                 entry_sign.delete(0, len(entry_sign.get()))
                 entry_sign.insert(0, c)
                 signage.set(c)
-
-            def save():
-                with open('signature.txt', 'w') as f:
-                    f.write(signage.get())
-                messagebox.showinfo("Success", "Signature has been saved!")
             
             
             roo.geometry("600x400")
@@ -118,13 +113,7 @@ class GUISigning(tk.Tk):
             button_sign = Button(roo, text="Sign", command=sign)
             button_sign.place(x=500, y=170)
 
-            button_save = Button(roo, text="Save binary", command=save)
+            button_save = Button(roo, text="Save binary", command=lambda: savefilesign(signage.get()))
             button_save.place(x=500, y=200)
-
-            button_save = Button(roo, text="Save txt", command=signtextfile)
-            button_save.place(x=500, y=230)
-
-            button_exit = Button(roo, text="Keluar", command=roo.destroy())
-            button_exit.place(x=500, y=230)
 
         GUISign()
