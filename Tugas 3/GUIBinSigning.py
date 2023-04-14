@@ -9,10 +9,10 @@ from SHA_3 import *
 from utility import *
 
 #membuat GUI dari frame, label, dan tombol
-class GUITextSigning(tk.Tk):
+class GUIBinSigning(tk.Tk):
     def __init__(roo):
         super().__init__()
-        def GUITextSign():
+        def GUIBinSign():
             def selecttextfile():
                 filename = filedialog.askopenfile(mode='r', filetypes=[('Text files', 'txt')])
                 if filename is not None:
@@ -47,10 +47,10 @@ class GUITextSigning(tk.Tk):
             
             
             roo.geometry("600x400")
-            roo.title("Digital Sign Text File")
+            roo.title("Digital Sign Binary File")
             roo.resizable(0, 0)
             roo.configure(bg = "#FBE6BF")
-            text = Label(roo, text="Pembangkitan tanda-tangan digital file text\n", font=("Arial", 12, "bold"), bg = "#FBE6BF")
+            text = Label(roo, text="Pembangkitan tanda-tangan digital file binary\n", font=("Arial", 12, "bold"), bg = "#FBE6BF")
             text.place(x=40, y=10)
 
             # variabel
@@ -102,4 +102,4 @@ class GUITextSigning(tk.Tk):
             button_save_com = Button(roo, text="Save Sign with Content", command=lambda: saveCombineSignTextFile(file.get(), signage.get()))
             button_save_com.place(x=250, y=300)
 
-        GUITextSign()
+        GUIBinSign()
