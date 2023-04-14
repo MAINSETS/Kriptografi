@@ -9,7 +9,7 @@ from SHA_3 import *
 from utility import *
 
 #membuat GUI dari frame, label, dan tombol
-class GUISigning(tk.Tk):
+class GUITextSigning(tk.Tk):
     def __init__(roo):
         super().__init__()
         def GUISign():
@@ -20,15 +20,6 @@ class GUISigning(tk.Tk):
                     entry_file.delete(0, len(entry_file.get()))
                     entry_file.insert(0, content)
                     file.set(content)
-            
-            def selectbinaryfile():
-                filename = filedialog.askopenfile(mode='rb', filetypes=[('All files', '*')])
-                if filename is not None:
-                    content = filename.read()
-                    contents = content.decode('latin-1')
-                    entry_file.delete(0, len(entry_file.get()))
-                    entry_file.insert(0, contents)
-                    file.set(contents)
 
             def selectkey():
                 content = openPrivateKeyFile()
@@ -64,6 +55,7 @@ class GUISigning(tk.Tk):
 
             # variabel
             file = StringVar()
+            content_wild = StringVar
             key = StringVar()
             hasil = StringVar()
             signage = StringVar()
@@ -77,43 +69,37 @@ class GUISigning(tk.Tk):
             button_file = Button(roo, text="Browse Text File", command=selecttextfile)
             button_file.place(x=500, y=50)
 
-            label_file = Label(roo, text="Open Binary File", font=("Arial", 12), bg = "#FBE6BF")
-            label_file.place(x=40, y=80)
-
-            entry_file = Entry(roo, textvariable=file, width=40)
-            entry_file.place(x=200, y=80)
-
-            button_file = Button(roo, text="Open Binary File", command=selectbinaryfile)
-            button_file.place(x=500, y=80)
-
             label_key = Label(roo, text="Private Key", font=("Arial", 12), bg = "#FBE6BF")
-            label_key.place(x=40, y=110)
+            label_key.place(x=40, y=80)
 
             entry_key = Entry(roo, textvariable=key, width=40)
-            entry_key.place(x=200, y=110)
+            entry_key.place(x=200, y=80)
 
             button_key = Button(roo, text="Browse", command=selectkey)
-            button_key.place(x=500, y=110)
+            button_key.place(x=500, y=80)
 
             label_hash = Label(roo, text="Hash", font=("Arial", 12), bg = "#FBE6BF")
-            label_hash.place(x=40, y=140)
+            label_hash.place(x=40, y=110)
 
             entry_hash = Entry(roo, textvariable=hasil, width=40)
-            entry_hash.place(x=200, y=140)
+            entry_hash.place(x=200, y=110)
 
             button_hash = Button(roo, text="Hash", command=hash)
-            button_hash.place(x=500, y=140)
+            button_hash.place(x=500, y=110)
 
             label_sign = Label(roo, text="Signature", font=("Arial", 12), bg = "#FBE6BF")
-            label_sign.place(x=40, y=170)
+            label_sign.place(x=40, y=140)
 
             entry_sign = Entry(roo, textvariable=signage, width=40)
-            entry_sign.place(x=200, y=170)
+            entry_sign.place(x=200, y=140)
 
             button_sign = Button(roo, text="Sign", command=sign)
-            button_sign.place(x=500, y=170)
+            button_sign.place(x=500, y=140)
 
-            button_save = Button(roo, text="Save binary", command=lambda: saveSeperateSignFile(signage.get()))
-            button_save.place(x=500, y=200)
+            button_save_sep = Button(roo, text="Save Sign Seperately", command=lambda: saveSeperateSignFile(signage.get()))
+            button_save_sep.place(x=450, y=300)
+
+            button_save_com = Button(roo, text="Save Sign with Content", command=lambda: saveCombineSignTextFile(file.get(), signage.get()))
+            button_save_com.place(x=250, y=300)
 
         GUISign()

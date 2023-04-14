@@ -5,7 +5,7 @@ from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 from RSA import *
 
 import GUIKeyGenerator as GUIKey
-import GUISigning as GUISign
+import GUITextSigning as GUITextSign
 import GUIVerifying as GUIVerify
 
 class Main(tk.Tk):
@@ -68,7 +68,7 @@ class Main(tk.Tk):
             image=button_image_2,
             borderwidth=0,
             highlightthickness=0,
-            command=GUISign.GUISigning,
+            command=GUITextSign.GUITextSigning,
             bg = "#FBE6BF",
             relief="flat"
         )

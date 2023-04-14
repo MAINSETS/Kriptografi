@@ -93,6 +93,9 @@ def saveTextFile(signed_content:str):
         messagebox.showerror('Cancelled', 'Penyimpanan file dibatalkan, nyaa~')
 
 def saveSeperateSignFile(sign:str):
+    '''
+    langsung minta user simpan filenya
+    '''
     f = asksaveasfile(mode='w', title="Save Sign File", defaultextension=".txt",
                       initialfile="sign_file", filetypes=[('Text Document (*.txt)', '.txt')])
     if(f is not None):
@@ -102,6 +105,23 @@ def saveSeperateSignFile(sign:str):
     else:
         messagebox.showerror('Cancelled', 'Penyimpanan file dibatalkan, nyaa~')
 
+def saveCombineSignTextFile(content:str, sign:int):
+    '''
+    Gabungin sign dengan text file. lalu minta user simpan file
+    content: isi file text sebelum
+    sign: digital sign
+    '''
+    # misal user milih satuin sama file
+    f = asksaveasfile(mode='w', title="Save Signed File", defaultextension=".txt",
+                      initialfile="signed_file", filetypes=[('Text Document (*.txt)', '.txt')])
+    signed_content = (content+'\n<ds>'+sign+'</ds>')
+
+    if(f is not None):
+        f.write(str(signed_content))
+        f.close()
+        messagebox.showinfo('Success', 'Penyimpanan file sukses, nyaa~')
+    else:
+        messagebox.showerror('Cancelled', 'Penyimpanan file dibatalkan, nyaa~')
 # batas GUI
 
 def stringtokey(stringkey:str):
@@ -122,16 +142,6 @@ def signtextfile(content:str, private_key:any):
     hashed_content = hash(content_bytes)
     integer_hashed = int(hashed_content, base=16)
     return encrypt(private_key, integer_hashed)
-
-def combineSignTextFile(content:str, sign:int):
-    '''
-    Gabungin sign dengan text file. hasilnya signed_content
-    content: isi file text sebelum
-    sign: digital sign
-    '''
-    # misal user milih satuin sama file
-    signed_content = (content+'\n<ds>'+sign+'</ds>')
-    return signed_content
 
 def signrandomfile(content:bytes, private_key:any):
     '''
@@ -185,12 +195,12 @@ def verifyTextFilePisah(content:str, public_key:any, sign:int):
 # verifyTextFileSatu(content, 212)
 # signedtextfile(content, "121",True)
 
-hash_string = "5fc00e5fbc533059e86f4ee35028613bc7fd464e9784fa121d7f9eec1d365cd3f1ecb8777c8e96f5996d93e17d71da905e0ab8079f0de8f1b936376dfbb593f9a44e275898aa7d6b0635df309b0eb34ec6d0b"
-content = "asasasasasas"
-pub = (24411363138917349115253366043256737150808072465601942568450914620309509606880338886099756808108737217757571688014542018318969078720110171969670193969482212499246923592909678998424386324347034568319, 3416732565075892732980794513890730495883304400261426509329556123158445423905862417385425908111992191663721420014761588105310312955704761495209486025869696379362667078169559887000848792628445755706863)
+# hash_string = "5fc00e5fbc533059e86f4ee35028613bc7fd464e9784fa121d7f9eec1d365cd3f1ecb8777c8e96f5996d93e17d71da905e0ab8079f0de8f1b936376dfbb593f9a44e275898aa7d6b0635df309b0eb34ec6d0b"
+# content = "asasasasasas"
+# pub = (24411363138917349115253366043256737150808072465601942568450914620309509606880338886099756808108737217757571688014542018318969078720110171969670193969482212499246923592909678998424386324347034568319, 3416732565075892732980794513890730495883304400261426509329556123158445423905862417385425908111992191663721420014761588105310312955704761495209486025869696379362667078169559887000848792628445755706863)
 
-a = verifyTextFilePisah(content, pub, int(hash_string, base=16))
-print(a)
+# a = verifyTextFilePisah(content, pub, int(hash_string, base=16))
+# print(a)
 
 # content = "openfdile()"
 # content_bytes = bytes(content, 'utf-8')
