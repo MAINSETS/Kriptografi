@@ -13,34 +13,39 @@ class GUITextVerifying(tk.Tk):
 
         def GUITextVerify():
             def openfile():
-                filename = filedialog.askopenfile(mode='rb', filetypes=[('All files', '*')])
-                if filename is not None:
-                    content = filename.read()
+                content = openTextFile()
+                if content is not None:
                     entry_file.delete(0, len(entry_file.get()))
                     entry_file.insert(0, content)
                     file.set(content)
             
             def openfilesign():
-                filename = filedialog.askopenfile(mode='rb', filetypes=[('All files', '*')])
-                if filename is not None:
-                    content = filename.read()
+                content = openTextFile()
+                if content is not None:
                     entry_sign.delete(0, len(entry_sign.get()))
                     entry_sign.insert(0, content)
                     filesign.set(content)
 
             def selectkey():
-                filename = filedialog.askopenfile(mode='rb', filetypes=[('All files', '*')])
-                if filename is not None:
-                    content = filename.read()
+                content = openPublicKeyFile()
+                if content is not None:
                     entry_key.delete(0, len(entry_key.get()))
                     entry_key.insert(0, content)
                     key.set(content) 
 
-            def verify():
+            def verifyPisah():
                 real_key =  stringtokey(str(key.get()))
-                content = file.get().split("'")[1]
-                sign = filesign.get().split("'")[1]
+                content = file.get()
+                sign = filesign.get()
                 if (verifyTextFilePisah(content, real_key, int(sign, base=16))):
+                    messagebox.showinfo("Verifikasi", "Tanda tangan valid")
+                else:
+                    messagebox.showinfo("Verifikasi", "Tanda tangan tidak valid")
+
+            def verifySatu():
+                real_key =  stringtokey(str(key.get()))
+                content = file.get()
+                if (verifyTextFileSatu(content, real_key)):
                     messagebox.showinfo("Verifikasi", "Tanda tangan valid")
                 else:
                     messagebox.showinfo("Verifikasi", "Tanda tangan tidak valid")
@@ -89,7 +94,10 @@ class GUITextVerifying(tk.Tk):
             label_hasil = Label(roo, text="Hasil Verifikasi", font=("Arial", 12), bg = "#FBE6BF")
             label_hasil.place(x=40, y=150)
 
-            button = Button(roo, text="Verifikasi", font=("Arial", 10), command = lambda: verify())
-            button.place(x=500, y=150)
+            button = Button(roo, text="Verifikasi Sign Terpisah", font=("Arial", 10), command = lambda: verifyPisah())
+            button.place(x=200, y=150)
+
+            button = Button(roo, text="Verifikasi Sign Tak Terpisah", font=("Arial", 10), command = lambda: verifySatu())
+            button.place(x=400, y=150)
 
         GUITextVerify()

@@ -13,10 +13,9 @@ class GUIBinSigning(tk.Tk):
     def __init__(roo):
         super().__init__()
         def GUIBinSign():
-            def selecttextfile():
-                filename = filedialog.askopenfile(mode='r', filetypes=[('Text files', 'txt')])
-                if filename is not None:
-                    content = filename.read()
+            def selectfile():
+                content = openRandomFile()
+                if content is not None:
                     entry_file.delete(0, len(entry_file.get()))
                     entry_file.insert(0, content)
                     file.set(content)
@@ -29,9 +28,8 @@ class GUIBinSigning(tk.Tk):
                     key.set(content)
             
             def hash():
-                a = file.get()
-                e = a.encode('latin-1')
-                b = sha3_256(e)
+                a = file.get().split("'")[1]
+                b = sha3_256(bytes(a, encoding="utf-8"))
                 entry_hash.delete(0, len(entry_hash.get()))
                 entry_hash.insert(0, b)
                 hasil.set(b)
@@ -55,7 +53,6 @@ class GUIBinSigning(tk.Tk):
 
             # variabel
             file = StringVar()
-            content_wild = StringVar
             key = StringVar()
             hasil = StringVar()
             signage = StringVar()
@@ -66,7 +63,7 @@ class GUIBinSigning(tk.Tk):
             entry_file = Entry(roo, textvariable=file, width=40)
             entry_file.place(x=200, y=50)
 
-            button_file = Button(roo, text="Browse Text File", command=selecttextfile)
+            button_file = Button(roo, text="Browse Text File", command=selectfile)
             button_file.place(x=500, y=50)
 
             label_key = Label(roo, text="Private Key", font=("Arial", 12), bg = "#FBE6BF")
@@ -98,8 +95,5 @@ class GUIBinSigning(tk.Tk):
 
             button_save_sep = Button(roo, text="Save Sign Seperately", command=lambda: saveSeperateSignFile(signage.get()))
             button_save_sep.place(x=450, y=300)
-
-            button_save_com = Button(roo, text="Save Sign with Content", command=lambda: saveCombineSignTextFile(file.get(), signage.get()))
-            button_save_com.place(x=250, y=300)
 
         GUIBinSign()

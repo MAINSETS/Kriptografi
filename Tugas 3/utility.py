@@ -11,7 +11,7 @@ def savePublicKeyFile(pub_sign:str):
     '''
     f = asksaveasfile(mode='w', title="Save Public Key File", defaultextension=".pub",
                       initialfile="public_key", filetypes=[('Public Key File (*.pub)', '.pub')])
-    if(f is not None):
+    if(f != ''):
         f.write(pub_sign)
         f.close()
         messagebox.showinfo('Success', 'Penyimpanan file sukses, nyaa~')
@@ -25,7 +25,7 @@ def savePrivateKeyFile(pri_sign:str):
     '''
     f = asksaveasfile(mode='w', title="Save Private Key File", defaultextension=".pri",
                       initialfile="private_key", filetypes=[('Private Key File (*.pri)', '.pri')])
-    if(f is not None):
+    if(f != ''):
         f.write(pri_sign)
         f.close()
         messagebox.showinfo('Success', 'Penyimpanan file sukses, nyaa~')
@@ -37,7 +37,7 @@ def openPublicKeyFile():
     Meminta user membuka file Public Key
     '''
     f = askopenfile(mode='r', title="Open Public Key File", filetypes=[('Public Key File (*.pub)', '.pub')])
-    if(f is not None):
+    if(f != ''):
         content = f.read()
         f.close()
         return content
@@ -49,7 +49,7 @@ def openPrivateKeyFile():
     Meminta user membuka file Private Key
     '''
     f = askopenfile(mode='r', title="Open Private Key File", filetypes=[('Private Key File (*.pri)', '.pri')])
-    if(f is not None):
+    if(f != ''):
         content = f.read()
         f.close()
         return content
@@ -62,20 +62,20 @@ def openRandomFile():
     return: content
     '''
     filename = askopenfilename(filetypes=[('All files', '*')])
-    if(filename is not None):
+    if(filename != ''):
     # mastiin file dah dipilih oleh user
         f = open(filename, 'rb')
         content = f.read()
         f.close()
-    return content
+        return content
 
 def openTextFile():
     '''
     Meminta user membuka file teks
     return: content
     '''
-    filename = askopenfilename(filetypes=[('All files', '*')])
-    if(filename is not None):
+    filename = askopenfilename(filetypes=[('Text Document (*.txt)', '.txt')])
+    if(filename != ''):
         # mastiin file dah dipilih oleh user
         f = open(filename, 'r')
         content = f.read()
@@ -85,7 +85,7 @@ def openTextFile():
 def saveTextFile(signed_content:str):
     f = asksaveasfile(mode='w', title="Save Signed Text File", defaultextension=".txt",
                       initialfile="sign file", filetypes=[('Text Document (*.txt)', '.txt')])
-    if(f is not None):
+    if(f != ''):
         f.write(signed_content)
         f.close()
         messagebox.showinfo('Success', 'Penyimpanan file sukses, nyaa~')
@@ -98,7 +98,7 @@ def saveSeperateSignFile(sign:str):
     '''
     f = asksaveasfile(mode='w', title="Save Sign File", defaultextension=".txt",
                       initialfile="sign_file", filetypes=[('Text Document (*.txt)', '.txt')])
-    if(f is not None):
+    if(f != ''):
         f.write(str(sign))
         f.close()
         messagebox.showinfo('Success', 'Penyimpanan file sukses, nyaa~')
@@ -116,7 +116,7 @@ def saveCombineSignTextFile(content:str, sign:int):
                       initialfile="signed_file", filetypes=[('Text Document (*.txt)', '.txt')])
     signed_content = (content+'\n<ds>'+sign+'</ds>')
 
-    if(f is not None):
+    if(f != ''):
         f.write(str(signed_content))
         f.close()
         messagebox.showinfo('Success', 'Penyimpanan file sukses, nyaa~')
@@ -157,7 +157,7 @@ def verifyTextFileSatu(content:str, public_key:any):
     '''
     verify content file text dengan sign satu file. hasil boolean
     '''
-    real_content, pre_sign = content.split('\n<ds>')
+    real_content, sign = content.split('\n<ds>')
 
     # hash dari content yang ada
     real_content_bytes = bytes(real_content, 'utf-8')
@@ -165,7 +165,7 @@ def verifyTextFileSatu(content:str, public_key:any):
     integer_hashed_real = int(hashed_real_content, base=16)
 
     # hash hasil decrypt
-    integer_sign = int(pre_sign.split('</ds>')[0])
+    integer_sign = int(sign.split('</ds>')[0], base=16)
     integer_decrypt_sign = decrypt(public_key, integer_sign)
         
     return integer_hashed_real == integer_decrypt_sign
@@ -179,10 +179,22 @@ def verifyTextFilePisah(content:str, public_key:any, sign:int):
     hashed_content = hash(content_bytes)
     integer_hashed = int(hashed_content, base=16)
 
-    # decrypt ciphertext jadi hash yang akan dikomparasi
-    sign_hash = decrypt(public_key, sign)
+    # decrypt ciphertext hash basis 10 yang akan dikomparasi
+    sign_hash_int = decrypt(public_key, sign)
         
-    return integer_hashed == sign_hash
+    return integer_hashed == sign_hash_int
+
+def verifyBinFile(content:bytes, public_key:any, sign:int):
+    '''
+    verify content file binary dengan sign. hasil boolean
+    '''
+    hashed_content = hash(content)
+    integer_hashed = int(hashed_content, base=16)
+
+    # decrypt ciphertext jadi hash basis 10 yang akan dikomparasi
+    sign_hash_int = decrypt(public_key, sign)
+        
+    return integer_hashed == sign_hash_int
 
 
 

@@ -21,7 +21,7 @@ class GUIBinVerifying(tk.Tk):
                     file.set(content)
             
             def openfilesign():
-                filename = filedialog.askopenfile(mode='rb', filetypes=[('All files', '*')])
+                filename = filedialog.askopenfile(mode='r', filetypes=[('Text Document (*.txt)', '.txt')])
                 if filename is not None:
                     content = filename.read()
                     entry_sign.delete(0, len(entry_sign.get()))
@@ -29,9 +29,8 @@ class GUIBinVerifying(tk.Tk):
                     filesign.set(content)
 
             def selectkey():
-                filename = filedialog.askopenfile(mode='rb', filetypes=[('All files', '*')])
-                if filename is not None:
-                    content = filename.read()
+                content = openPublicKeyFile()
+                if content is not None:
                     entry_key.delete(0, len(entry_key.get()))
                     entry_key.insert(0, content)
                     key.set(content) 
@@ -39,8 +38,9 @@ class GUIBinVerifying(tk.Tk):
             def verify():
                 real_key =  stringtokey(str(key.get()))
                 content = file.get().split("'")[1]
-                sign = filesign.get().split("'")[1]
-                if (verifyTextFilePisah(content, real_key, int(sign, base=16))):
+                byte_content = bytes(content, encoding="utf-8")
+                sign = filesign.get()
+                if (verifyBinFile(byte_content, real_key, int(sign, base=16))):
                     messagebox.showinfo("Verifikasi", "Tanda tangan valid")
                 else:
                     messagebox.showinfo("Verifikasi", "Tanda tangan tidak valid")
