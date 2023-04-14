@@ -45,10 +45,13 @@ class GUITextVerifying(tk.Tk):
             def verifySatu():
                 real_key =  stringtokey(str(key.get()))
                 content = file.get()
-                if (verifyTextFileSatu(content, real_key)):
-                    messagebox.showinfo("Verifikasi", "Tanda tangan valid")
+                if('<ds' in content):
+                    if (verifyTextFileSatu(content, real_key)):
+                        messagebox.showinfo("Verifikasi", "Tanda tangan valid")
+                    else:
+                        messagebox.showinfo("Verifikasi", "Tanda tangan tidak valid")
                 else:
-                    messagebox.showinfo("Verifikasi", "Tanda tangan tidak valid")
+                    messagebox.showerror("Unsigned File", "File belum ditandatangani \n(file yang ditandatangani memiliki '<ds>' di dalam dokumen)")
 
 
             roo.geometry("600x400")
@@ -99,5 +102,11 @@ class GUITextVerifying(tk.Tk):
 
             button = Button(roo, text="Verifikasi Sign Tak Terpisah", font=("Arial", 10), command = lambda: verifySatu())
             button.place(x=400, y=150)
+
+            label_key = Label(roo, text="*taruh file yang sudah ditandatangani pada entry paling atas jika ingin verifikasi sign tak terpisah", font=("Arial", 9), bg = "#FBE6BF")
+            label_key.place(x=10, y=350)
+
+            label_key = Label(roo, text="tidak perlu mengisi entry ke-dua", font=("Arial", 9), bg = "#FBE6BF")
+            label_key.place(x=10, y=370)
 
         GUITextVerify()
