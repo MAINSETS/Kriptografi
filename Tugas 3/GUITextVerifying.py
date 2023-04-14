@@ -36,11 +36,21 @@ class GUITextVerifying(tk.Tk):
                     entry_key.insert(0, content)
                     key.set(content) 
 
+            def verifyaja():
+                real_key =  stringtokey(str(key.get()))
+                content = file.get().split("'")[1]
+                sign = filesign.get().split("'")[1]
+                a = sha3_256(content.encode('utf-8'))
+                b = decrypt(real_key, int(sign, base=16))
+                print(a)
+                print(b)
+                return a==b
+
             def verify():
                 real_key =  stringtokey(str(key.get()))
                 content = file.get().split("'")[1]
                 sign = filesign.get().split("'")[1]
-                if (verifyTextFilePisah(content, real_key, int(sign, base=16))):
+                if (verifyTextFilePisah(content, real_key, int(sign, base=16)) and verifyaja()):
                     messagebox.showinfo("Verifikasi", "Tanda tangan valid")
                 else:
                     messagebox.showinfo("Verifikasi", "Tanda tangan tidak valid")
@@ -53,7 +63,6 @@ class GUITextVerifying(tk.Tk):
 
             file = StringVar()
             filesign = StringVar()
-            hasil = StringVar()
             key = StringVar()
             
             text = Label(roo, text="Verifikasi tanda-tangan digital\n", font=("Arial", 12, "bold"), bg = "#FBE6BF")
