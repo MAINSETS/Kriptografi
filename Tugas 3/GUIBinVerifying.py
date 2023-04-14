@@ -62,7 +62,7 @@ class GUIBinVerifying(tk.Tk):
             text = Label(roo, text="File Awal", font=("Arial", 12), bg = "#FBE6BF")
             text.place(x=40, y=50)
 
-            entry_file = Entry(roo, textvariable=file, width=40, state=DISABLED)
+            entry_file = Entry(roo, textvariable=file, width=40)
             entry_file.place(x=200, y=50)
 
             button = Button(roo, text="Browse", font=("Arial", 10), command = openfile)
@@ -71,7 +71,7 @@ class GUIBinVerifying(tk.Tk):
             text = Label(roo, text="File Signature", font=("Arial", 12), bg = "#FBE6BF")
             text.place(x=40, y=80)
 
-            entry_sign = Entry(roo, textvariable=filesign, width=40, state=DISABLED)
+            entry_sign = Entry(roo, textvariable=filesign, width=40)
             entry_sign.place(x=200, y=80)
 
             button = Button(roo, text="Browse", font=("Arial", 10), command = openfilesign)
@@ -80,7 +80,7 @@ class GUIBinVerifying(tk.Tk):
             label_key = Label(roo, text="Public Key", font=("Arial", 12), bg = "#FBE6BF")
             label_key.place(x=40, y=110)
 
-            entry_key = Entry(roo, textvariable=key, width=40, state=DISABLED)
+            entry_key = Entry(roo, textvariable=key, width=40)
             entry_key.place(x=200, y=110)
 
             button_key = Button(roo, text="Browse", font=("Arial", 10), command=selectkey)

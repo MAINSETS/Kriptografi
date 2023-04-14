@@ -68,7 +68,7 @@ class GUITextSigning(tk.Tk):
             label_file = Label(roo, text="File", font=("Arial", 12), bg = "#FBE6BF")
             label_file.place(x=40, y=50)
 
-            entry_file = Entry(roo, textvariable=file, width=40, state=DISABLED)
+            entry_file = Entry(roo, textvariable=file, width=40)
             entry_file.place(x=200, y=50)
 
             button_file = Button(roo, text="Browse Text File", command=selecttextfile)
@@ -77,7 +77,7 @@ class GUITextSigning(tk.Tk):
             label_key = Label(roo, text="Private Key", font=("Arial", 12), bg = "#FBE6BF")
             label_key.place(x=40, y=80)
 
-            entry_key = Entry(roo, textvariable=key, width=40, state=DISABLED)
+            entry_key = Entry(roo, textvariable=key, width=40)
             entry_key.place(x=200, y=80)
 
             button_key = Button(roo, text="Browse", command=selectkey)
@@ -86,7 +86,7 @@ class GUITextSigning(tk.Tk):
             label_hash = Label(roo, text="Hash", font=("Arial", 12), bg = "#FBE6BF")
             label_hash.place(x=40, y=110)
 
-            entry_hash = Entry(roo, textvariable=hasil, width=40, state=DISABLED)
+            entry_hash = Entry(roo, textvariable=hasil, width=40)
             entry_hash.place(x=200, y=110)
 
             button_hash = Button(roo, text="Hash", command=hash)
@@ -95,7 +95,7 @@ class GUITextSigning(tk.Tk):
             label_sign = Label(roo, text="Signature", font=("Arial", 12), bg = "#FBE6BF")
             label_sign.place(x=40, y=140)
 
-            entry_sign = Entry(roo, textvariable=signage, width=40, state=DISABLED)
+            entry_sign = Entry(roo, textvariable=signage, width=40)
             entry_sign.place(x=200, y=140)
 
             button_sign = Button(roo, text="Sign", command=sign)
