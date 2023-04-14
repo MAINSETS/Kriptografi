@@ -1,5 +1,5 @@
 <a name="readme-top"></a>
-<h1 align="center">Digital Signaturer</h1>
+<h1 align="center">Digital Signature</h1>
 <!-- TABLE OF CONTENTS -->
 Daftar Isi
   <ol>
@@ -12,7 +12,7 @@ Daftar Isi
 
 **Digital Signature**
 
-Aplikasi desktop digital signature mengimplementasikan algoritma RSA + SHA-3 (Keccak) untuk memberi tanda-tangan digital pada dokumen (file) elektronis. Dalam hal ini, pengguna sebagai pemilik dokumen mempunyai sepasang kunci, yaitu kunci publik dan kunci privat. 
+Aplikasi desktop 'Digital Signature' mengimplementasikan algoritma RSA + SHA-3 (Keccak) untuk memberi tanda-tangan digital pada dokumen (file) elektronis. Dalam hal ini, pengguna sebagai pemilik dokumen mempunyai sepasang kunci, yaitu kunci publik dan kunci privat yang digunakan untuk menandatangani dokumen dan memverifikasi keaslian dokumen. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
