@@ -34,6 +34,6 @@ class GUISigning(tk.Tk):
             button_1.place(x=11, y=100)
 
             button_2 = Button(roo, text="Binary File Signing", command=lambda: [GUIBinSign.GUIBinSigning(), close()], bg= '#FBB43C')
-            button_2.place(x=170, y=100)   
+            button_2.place(x=170, y=100)
         
         GUISigning()

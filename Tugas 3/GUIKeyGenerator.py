@@ -55,44 +55,44 @@ class GUIKeyGenerator(tk.Tk):
             text = Label(roo, text="Nilai p", font=("Arial", 10, "bold"), bg = "#FBE6BF")
             text.place(x=50, y=110)
 
-            entry_p = Entry(roo, font=("Arial", 10, "bold"), bg = "#FFFFFF")
+            entry_p = Entry(roo, font=("Arial", 10, "bold"), bg = "#FFFFFF",state=DISABLED)
             entry_p.place(x=150, y=110)
 
             # Bagian q
             text = Label(roo, text="Nilai q", font=("Arial", 10, "bold"), bg = "#FBE6BF")
             text.place(x=50, y=160)
 
-            entry_q = Entry(roo, font=("Arial", 10, "bold"), bg = "#FFFFFF")
+            entry_q = Entry(roo, font=("Arial", 10, "bold"), bg = "#FFFFFF", state=DISABLED)
             entry_q.place(x=150, y=160, height=20)
             
             # Bagian kunci publik
             text = Label(roo, text="Kunci publik", font=("Arial", 10, "bold"), bg = "#FBE6BF")
             text.place(x=50, y=210)
 
-            entry_pub = Entry(roo, textvariable=pub, font=("Arial", 10, "bold"), bg = "#FFFFFF")
+            entry_pub = Entry(roo, textvariable=pub, font=("Arial", 10, "bold"), bg = "#FFFFFF", state=DISABLED)
             entry_pub.place(x=150, y=210)
 
             # Bagian kunci privat
             text = Label(roo, text="Kunci privat", font=("Arial", 10, "bold"), bg = "#FBE6BF")
             text.place(x=50, y=260)
 
-            entry_pri = Entry(roo, textvariable=pri, font=("Arial", 10, "bold"), bg = "#FFFFFF")
+            entry_pri = Entry(roo, textvariable=pri, font=("Arial", 10, "bold"), bg = "#FFFFFF", state=DISABLED)
             entry_pri.place(x=150, y=260, height=20)
 
             # Buttons
-            button = Button(roo, text="Keluar", font=("Arial", 10, "bold"), bg = "#FBE6BF", command = lambda: roo.destroy())
+            button = Button(roo, text="Keluar", font=("Arial", 10, "bold"), bg = "#FFFFFF", command = lambda: roo.destroy())
             button.place(x=500, y=350)
             
             text = Label(roo, text=" Pembangkitan kunci publik dan kunci privat RSA\n", font=("Arial", 12, "bold"), bg = "#FBE6BF")
             text.place(x=40, y=10)
 
-            button = Button(roo, text="Generate p dan q", font=("Arial", 10, "bold"), bg = "#FBE6BF", command = lambda :fillentryp_q())
+            button = Button(roo, text="Generate p dan q", font=("Arial", 10, "bold"), bg = "#FFFFFF", command = lambda :fillentryp_q())
             button.place(x=325, y=110)
 
-            button = Button(roo, text="Generate Key", font=("Arial", 10, "bold"), bg = "#FBE6BF", command = lambda :getkey())
+            button = Button(roo, text="Generate Key", font=("Arial", 10, "bold"), bg = "#FFFFFF", command = lambda :getkey())
             button.place(x=325, y=210)
 
-            button = Button(roo, text="Simpan kunci", font=("Arial", 10, "bold"), bg = "#FBE6BF", command = lambda: write())
+            button = Button(roo, text="Simpan kunci", font=("Arial", 10, "bold"), bg = "#FFFFFF", command = lambda: write())
             button.place(x=325, y=350)
 
 
