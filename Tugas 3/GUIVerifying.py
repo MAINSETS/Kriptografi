@@ -22,7 +22,7 @@ class GUIVerifying(tk.Tk):
                     file.set(content)
             
             def openfilesign():
-                filename = filedialog.askopenfile(mode='rb', filetypes=[('All files', '*')])
+                filename = filedialog.askopenfile(mode='r', filetypes=[('All files', '*')])
                 if filename is not None:
                     content = filename.read()
                     entry_sign.delete(0, len(entry_sign.get()))
@@ -40,8 +40,8 @@ class GUIVerifying(tk.Tk):
             def verify():
                 stringkey = str(key.get())
                 real_key =  stringtokey(stringkey)
-                d = decrypt(real_key, int(float(filesign.get().strip('b').strip('\''))))
-                if (d == sha3_256(file.get().encode('latin-1'))):
+                d = decrypt(real_key, int(float(filesign.get().encode('latin-1'))))
+                if (hex(d) == sha3_256(file.get().encode('latin-1'))):
                     messagebox.showinfo("Verifikasi", "Tanda tangan valid")
                 else:
                     messagebox.showinfo("Verifikasi", "Tanda tangan tidak valid")
@@ -52,7 +52,6 @@ class GUIVerifying(tk.Tk):
 
             file = StringVar()
             filesign = StringVar()
-            hasil = StringVar()
             key = StringVar()
             
             text = Label(roo, text="Verifikasi tanda-tangan digital\n", font=("Arial", 12, "bold"), bg = "#FBE6BF")
