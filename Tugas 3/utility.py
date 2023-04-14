@@ -4,26 +4,39 @@ from RSA import encrypt, decrypt
 from tkinter import messagebox
 
 # nanti pindahin ke GUI
-def savefilesign(sign:str):
+def savePublicKeyFile(pub_sign:str):
     '''
-    Meminta user untuk menyimpan digital signature
+    Meminta user untuk menyimpan public key ke file
     content: digital signature
     '''
-    f = asksaveasfile(mode='w', title="Save sign file", defaultextension=".digsi",
-                      initialfile="sign file", filetypes=[('Digital sign file', '.digsi')])
-    sign = str(sign)
+    f = asksaveasfile(mode='w', title="Save Public Key File", defaultextension=".pub",
+                      initialfile="public_key", filetypes=[('Public Key File (*.pub)', '.pub')])
     if(f is not None):
-        f.write(sign)
+        f.write(pub_sign)
         f.close()
         messagebox.showinfo('Success', 'Penyimpanan file sukses, nyaa~')
     else:
         messagebox.showerror('Cancelled', 'Penyimpanan file dibatalkan, nyaa~')
 
-def openfilesign():
+def savePrivateKeyFile(pri_sign:str):
     '''
-    Meminta user membuka file digital signature
+    Meminta user untuk menyimpan private key ke file
+    content: digital signature
     '''
-    f = askopenfile(mode='r', title="Open sign file", filetypes=[('Digital sign file', '.digsi')])
+    f = asksaveasfile(mode='w', title="Save Private Key File", defaultextension=".pri",
+                      initialfile="private_key", filetypes=[('Private Key File (*.pri)', '.pri')])
+    if(f is not None):
+        f.write(pri_sign)
+        f.close()
+        messagebox.showinfo('Success', 'Penyimpanan file sukses, nyaa~')
+    else:
+        messagebox.showerror('Cancelled', 'Penyimpanan file dibatalkan, nyaa~')
+
+def openPublicKeyFile():
+    '''
+    Meminta user membuka file Public Key
+    '''
+    f = askopenfile(mode='r', title="Open Public Key File", filetypes=[('Public Key File (*.pub)', '.pub')])
     if(f is not None):
         content = f.read()
         f.close()
@@ -31,26 +44,65 @@ def openfilesign():
     else:
         messagebox.showerror('No File Chosen', 'Tidak ada file yang dipilih, nyaa~')
 
-def openfile():
+def openPrivateKeyFile():
+    '''
+    Meminta user membuka file Private Key
+    '''
+    f = askopenfile(mode='r', title="Open Private Key File", filetypes=[('Private Key File (*.pri)', '.pri')])
+    if(f is not None):
+        content = f.read()
+        f.close()
+        return content
+    else:
+        messagebox.showerror('No File Chosen', 'Tidak ada file yang dipilih, nyaa~')
+
+def openRandomFile():
     '''
     Meminta user membuka file sembarang.
-    return content
+    return: content
     '''
     filename = askopenfilename(filetypes=[('All files', '*')])
     if(filename is not None):
     # mastiin file dah dipilih oleh user
-        ext = filename.split('.')[1]
-        if(ext == 'txt'):
-            #file text
-            f = open(filename, 'r')
-            content = f.read()
-            f.close()
-        else:
-            #file sembarang
-            f = open(filename, 'rb')
-            content = f.read()
-            f.close()
-    return content, ext
+        f = open(filename, 'rb')
+        content = f.read()
+        f.close()
+    return content
+
+def openTextFile():
+    '''
+    Meminta user membuka file teks
+    return: content
+    '''
+    filename = askopenfilename(filetypes=[('All files', '*')])
+    if(filename is not None):
+        # mastiin file dah dipilih oleh user
+        f = open(filename, 'r')
+        content = f.read()
+        f.close()
+        return content
+
+def saveTextFile(signed_content:str):
+    f = asksaveasfile(mode='w', title="Save Signed Text File", defaultextension=".txt",
+                      initialfile="sign file", filetypes=[('Text Document (*.txt)', '.txt')])
+    if(f is not None):
+        f.write(signed_content)
+        f.close()
+        messagebox.showinfo('Success', 'Penyimpanan file sukses, nyaa~')
+    else:
+        messagebox.showerror('Cancelled', 'Penyimpanan file dibatalkan, nyaa~')
+
+def saveSeperateSignFile(sign:str):
+    f = asksaveasfile(mode='w', title="Save Sign File", defaultextension=".txt",
+                      initialfile="sign_file", filetypes=[('Text Document (*.txt)', '.txt')])
+    if(f is not None):
+        f.write(str(sign))
+        f.close()
+        messagebox.showinfo('Success', 'Penyimpanan file sukses, nyaa~')
+    else:
+        messagebox.showerror('Cancelled', 'Penyimpanan file dibatalkan, nyaa~')
+
+# batas GUI
 
 def stringtokey(stringkey:str):
     '''
@@ -62,6 +114,14 @@ def stringtokey(stringkey:str):
     key = int(k), int(n)
     return key
 
+def signtextfile(content:str, private_key:any):
+    '''
+    sign document, return hasil encrypt intinya ngehasilin tanda tangan (sign)
+    '''
+    content_bytes = bytes(content, 'utf-8')
+    hashed_content = hash(content_bytes)
+    integer_hashed = int(hashed_content, base=16)
+    return encrypt(private_key, integer_hashed)
 
 def combineSignTextFile(content:str, sign:int):
     '''
@@ -73,17 +133,6 @@ def combineSignTextFile(content:str, sign:int):
     signed_content = (content+'\n<ds>'+sign+'</ds>')
     return signed_content
 
-# batas GUI
-
-def signtextfile(content:str, private_key:any):
-    '''
-    sign document, return hasil encrypt intinya ngehasilin tanda tangan (sign)
-    '''
-    content_bytes = bytes(content, 'utf-8')
-    hashed_content = hash(content_bytes)
-    integer_hashed = int(hashed_content, base=16)
-    return encrypt(private_key, integer_hashed)
-
 def signrandomfile(content:bytes, private_key:any):
     '''
     sign document sembarang. return hasil encrypt
@@ -92,6 +141,8 @@ def signrandomfile(content:bytes, private_key:any):
     integer_hashed = int(hashed_content, base=16)
     return encrypt(private_key, integer_hashed)
 
+
+# veritfy
 def verifyTextFileSatu(content:str, public_key:any):
     '''
     verify content file text dengan sign satu file. hasil boolean
@@ -133,6 +184,13 @@ def verifyTextFilePisah(content:str, public_key:any, sign:int):
 # content, ext = openfile()
 # verifyTextFileSatu(content, 212)
 # signedtextfile(content, "121",True)
+
+hash_string = "5fc00e5fbc533059e86f4ee35028613bc7fd464e9784fa121d7f9eec1d365cd3f1ecb8777c8e96f5996d93e17d71da905e0ab8079f0de8f1b936376dfbb593f9a44e275898aa7d6b0635df309b0eb34ec6d0b"
+content = "asasasasasas"
+pub = (24411363138917349115253366043256737150808072465601942568450914620309509606880338886099756808108737217757571688014542018318969078720110171969670193969482212499246923592909678998424386324347034568319, 3416732565075892732980794513890730495883304400261426509329556123158445423905862417385425908111992191663721420014761588105310312955704761495209486025869696379362667078169559887000848792628445755706863)
+
+a = verifyTextFilePisah(content, pub, int(hash_string, base=16))
+print(a)
 
 # content = "openfdile()"
 # content_bytes = bytes(content, 'utf-8')
