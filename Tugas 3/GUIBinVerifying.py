@@ -47,7 +47,7 @@ class GUIBinVerifying(tk.Tk):
 
 
             roo.geometry("600x400")
-            roo.title("Verifiying Sign")
+            roo.title("Verifiying Sign Binary File")
             roo.resizable(0, 0)
             roo.configure(bg = "#FBE6BF")
 
@@ -56,7 +56,7 @@ class GUIBinVerifying(tk.Tk):
             hasil = StringVar()
             key = StringVar()
             
-            text = Label(roo, text="Verifikasi tanda-tangan digital\n", font=("Arial", 12, "bold"), bg = "#FBE6BF")
+            text = Label(roo, text="Verifikasi tanda-tangan digital file non-text\n", font=("Arial", 12, "bold"), bg = "#FBE6BF")
             text.place(x=40, y=10)
 
             text = Label(roo, text="File Awal", font=("Arial", 12), bg = "#FBE6BF")

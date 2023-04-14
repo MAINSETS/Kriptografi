@@ -13,7 +13,7 @@ class Main(tk.Tk):
         super().__init__()
         
         #canvas
-        root.geometry("1000x600")
+        root.geometry("790x400")
         root.title("Program Tanda-tangan Digital")
         root.configure(bg = "#FBE6BF")
 
@@ -28,7 +28,7 @@ class Main(tk.Tk):
         )
         canvas.place(x = 0, y = 0)
         canvas.create_text(
-            250,
+            120,
             30,
             anchor="nw",
             text="Program Tanda-tangan Digital",
@@ -37,12 +37,21 @@ class Main(tk.Tk):
         )
 
         canvas.create_text(
-            450,
+            320,
             100,
             anchor="nw",
             text="Digital Signature",
             fill="#000000",
             font=("OpenSansRoman Regular", 20 * -1)
+        )
+        
+        canvas.create_text(
+            120,
+            370,
+            anchor="nw",
+            text="dibuat oleh 18220031 Muhammad Raihan Aulia, 18220052 Christopher Jie, 18220066 Michel Vito Adinugroho",
+            fill="#000000",
+            font=("OpenSansRoman Regular", 12 * -1)
         )
 
         #button
@@ -58,7 +67,7 @@ class Main(tk.Tk):
         )
         button_1.place(
             x=25.0,
-            y=150.0,
+            y=250.0,
             width=125,
             height=55
         )
@@ -73,7 +82,7 @@ class Main(tk.Tk):
             relief="flat"
         )
         button_2.place(
-            x=25,
+            x=225,
             y=250,
             width=125,
             height=55
@@ -89,8 +98,8 @@ class Main(tk.Tk):
             relief="flat"
         )
         button_3.place(
-            x=25,
-            y=350,
+            x=425,
+            y=250,
             width=125,
             height=55
         )
@@ -105,26 +114,13 @@ class Main(tk.Tk):
             relief="flat"
         )
         button_4.place(
-            x=25,
-            y=450,
+            x=625,
+            y=250,
             width=125,
             height=55
         )
                 
-        #entry
-        entry_ptext = Text(
-            bd=0,
-            bg="#FFFFFF",
-            fg="#000716",
-            highlightthickness=1
-        )
         
-        entry_ptext.place(
-            x=200.0,
-            y=150.0,
-            width=700.0,
-            height=350.0
-        )
         
         root.resizable(False, False)
         root.mainloop()
